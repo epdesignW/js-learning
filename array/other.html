@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>array的其他方法</title>
+    <style>
+     .wraper{ width: 60% ; color: #666; font-family: "Microsoft Yahei"; margin: 0 auto;}
+     pre{ font-size: 1.2em;}
+     p{ line-height: 2.0;}
+     p > span{ color: darkcyan; }
+     h5{ font-size: 1.5em; color: #333;}
+    </style>
+</head>
+<body>
+    <div class="wraper">
+        <h5>1. some()</h5>
+        <p><span>语法：</span>array.some(callback,[ thisObject]);</p>
+        <p>some要求至少有1个值让callback返回true就可以了。</p>
+        <h5>2. every()</h5>
+        <p><span>语法：</span>array.every(callback,[ thisObject]);</p>
+        <p>every要求所有值让callback返回true才可以。</p>
+        <h5>3. indexOf()</h5>
+        <p><span>语法：</span>array.indexOf(searchElement[, fromIndex])</p>
+        <p>返回整数索引值，如果没有匹配（严格匹配），返回-1. fromIndex可选，表示从这个位置开始搜索，若缺省或格式不合要求，使用默 认值0，</p>
+        <p>lastIndexOf方法与indexOf方法类似：</p>
+        <h5>4. reduce()  更接近于“迭代”、“递归(recursion)”</h5>
+        <p><span>语法：</span>array.reduce(callback[, initialValue])</p>
+        <p>callback函数接受4个参数：之前值、当前值、索引值以及数组本身。initialValue参数可选，表示初始值。若指定，则当作最初使用的previous值；如果缺省，则使用数组的第一个元素作为previous初始值，同时current往后排一位，相比有initialValue值少一次迭代。</p>
+        <p>reduceRight跟reduce相比，用法类似</p>
+    <pre>
+    
+    </pre>
+
+
+    </div>
+    <script>
+    var data = [2, 5, 7, 3, 5];
+
+    console.log(data.indexOf(5, "x")); // 1 ("x"被忽略)
+    console.log(data.indexOf(5, "3")); // 4 (从3号位开始搜索)
+
+    console.log(data.indexOf(4)); // -1 (未找到)
+    console.log(data.indexOf("5")); // -1 (未找到，因为5 !== "5")
+
+
+    var matrix = [
+        [1, 2],
+        [3, 4],
+        [5, 6]
+        ];
+
+        // 二维数组扁平化
+        var flatten = matrix.reduce(function (previous, current) {
+        return previous.concat(current);
+        });
+
+        console.log(flatten); // [1, 2, 3, 4, 5, 6]
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>笑脸</title>
+</head>
+<body>
+    <div id="face"></div>
+    <script>
+      var faces =[];
+       for(var i=1; i<258; i++){
+         var img = '<img src="http://mat1.gtimg.com/www/mb/images/face/' +  i   +  '.gif" />';
+         faces.push(img);
+       }
+       var facesStr = faces.join("");
+       //alert(facesStr);
+       document.getElementById("face").innerHTML = facesStr;
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ES5 Array新方法forEach使用实例</title>
+<style>
+ .wraper{ width: 60% ; font-family: "Microsoft Yahei"; margin: 0 auto;}
+ pre{ font-size: 1.2em;}
+ p{ line-height: 2.0;}
+ p > span{ color: darkcyan;}
+</style>
+</head>
+<body>
+    <h2>张鑫旭的本家人</h2>
+    <p id="result"></p>
+    <p><span>知识点：</span> <br>
+        1. forEach(回调函数,上下文参数（改变回调函数里面的this指向）) <br>
+        2. window.console是什么 <br>
+        3. 重写console.log = function(result) { ... } ，在console.log(window.console)知道有log方法结构后; <br>
+        4. forEach方法的浏览器兼容，仿真扩展：if (typeof Array.prototype.forEach != "function") { <br>
+            Array.prototype.forEach = function (fn, context) { ... }   <br>
+        5. RegExpObject.test(string)   //用于检测一个字符串是否匹配某个模式.  <br>
+        6. DOM节点操作，createTextNode(...), creatElement("br");  appendChild(变量)  <br>
+        7. 心得,学着用console.log调试程序，不要去猜this是什么，直接console.log(this)打印出来就知道this是谁了 <br>
+
+        
+        </p>
+<script>
+   
+   //JS代码：
+    var eleResult = document.getElementById("result");
+    if (!window.console) {
+        window.console = {};
+    }
+    //console到底是什么，打印出来看一看
+    console.log(window.console);
+    //重写了console.log方法并使用，使用这个方法和新定义方法对比区分
+    console.log = function(result) {
+        var text = document.createTextNode(result), br = document.createElement("br");
+        eleResult.appendChild(text);
+        eleResult.appendChild(br);
+    };
+    //这个函数的效果等同于上面的console.log方法
+    function getUserInfo(result){
+        var text = document.createTextNode(result), br = document.createElement("br");
+        eleResult.appendChild(text);
+        eleResult.appendChild(br);
+    }
+   //处理forEach的IE6-8兼容 
+    if (typeof Array.prototype.forEach != "function") {
+    Array.prototype.forEach = function (fn, context) {
+        for (var k = 0, length = this.length; k < length; k++) {
+        if (typeof fn === "function" && Object.prototype.hasOwnProperty.call(this, k)) {
+            fn.call(context, this[k], k, this);
+        }
+        }
+    };
+    }
+   alert(this);
+    var database = {
+    users: ["张含韵", "江一燕", "李小璐"],
+    sendEmail: function (user) {
+        if (this.isValidUser(user)) {
+         console.log("你好，" + user);
+         alert(this);  //上下文是window 
+         // getUserInfo("你好，" + user);   //函数参数可以是一个对象
+        } else {
+        console.log("抱歉，"+ user +",你不是本家人");    
+        }
+    },
+    isValidUser: function (user) {
+        return /^张/.test(user);   
+    }
+    };
+
+    // 给每个人法邮件
+    database.users.forEach(  // database.users中人遍历
+    database.sendEmail,    // 发送邮件
+    database               // 使用database代替上面database.sendEmail方法中的上下文this
+    //如果这第2个可选参数不指定，则使用全局对象代替（在浏览器是为window），严格模式下甚至是undefined.
+    );
+    </script>
+
+</body>
+
+</html>
