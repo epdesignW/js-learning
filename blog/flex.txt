@@ -1,0 +1,16 @@
+http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html
+
+
+flex的demo：
+http://static.vgee.cn/static/index.html
+
+
+国外博客：
+https://scotch.io/tutorials/a-visual-guide-to-css3-flexbox-properties
+
+
+https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+
+
+基础看完过一遍这个：
+http://static.vgee.cn/static/index.html
