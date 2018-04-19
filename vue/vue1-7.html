@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-bind 指令 - vue第一季 </title>
+    <script src="js/vue.js"></script>
+    <style type="text/css">
+     body{ width: 60%; margin: 0 auto; padding-bottom:100px;}
+     .baidu{ text-align: center;}
+     .baidu a{ text-decoration:none;}
+      xmp{ line-height: 1.5;}
+      .miaoshu{ color: greenyellow;}
+      .colorS{ color: orangered;}
+      .fontSizeS{ font-size: 22px;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="baidu">
+            <a v-bind:href="link" target="_blank"><img v-bind:src="imgUrl" /></a>
+        </div>
+        <p>v-bind是处理HTML中的标签属性的，例如<div></div>就是一个标签，<img>也是一个标签，我们绑定<img>上的src(或者a标签的href)进行动态赋值。</p>
+        <p>
+            <span style=" color:darkcyan;">缩写方式：</span>
+            
+        </p>
+        <div v-once>v-once指令 <br> 第一次绑定的值：{{mymessage}}</div>
+        <div><input type="text" v-model="mymessage"></div>
+        <hr>
+        <div style=" border:1px solid #666;">
+            <h5>完整语法那段代码的v-pre后显示</h5>
+            <div v-pre>
+                <xmp>
+                        <!-- 完整语法 -->
+                        <a v-bind:href="link">百度</a>
+                        <!-- 缩写 -->
+                        <a :href="link">百度</a>
+                </xmp>
+            </div>
+        </div>
+    </div> 
+    <xmp>
+        <!-- 完整语法 -->
+        <a v-bind:href="link">百度</a>
+        <!-- 缩写 -->
+        <a :href="link">百度</a>
+    </xmp>
+    <p style="text-align:center;"><img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1164455986,2118828899&fm=27&gp=0.jpg" width="300" /></p>
+    <hr>
+    <div id="ipp">
+        <ul>
+            <li>
+                1、直接绑定class样式
+                <p v-bind:class="className">直接绑定class样式</p>
+            </li>
+            <li>
+                2、绑定class中的判断,来决定是不是显示样式
+                <p v-bind:class="{miaoshu:flag}">绑定class中的判断</p>
+            </li>
+            <li>
+                3、绑定class中的数组
+                <p v-bind:class="[colorC,fontSizeC]">绑定class中的数组,一个元素上加多个类名</p>
+            </li>
+            <li>
+                4、绑定class中使用三元表达式判断
+                <p v-bind:class="isOk?colorC:fontSizeC">绑定class中使用三元表达式判断, ok了是改颜色，否则改字体大小</p>
+            </li>
+            <li>
+                5、绑定style行内样式( <span style="color:red;">有些问题</span> )
+                <p v-bind:style="{color:redA,fontSize:fonta}">绑定style行内样式</p>
+            </li>
+            <li>
+                6、用对象绑定style样式
+                <p v-bind:style="styleObject">用对象绑定style样式</p>
+            </li>
+        </ul>
+    </div>
+    <hr> <hr>
+    <p style="color:darkcyan;">第一季我们学习了Vue中的指令，这也是Vue中最容易理解的部分，以前我也只是使用Vue，通过这个课程的制作，我也对Vue指令有了全面和更深刻的了解。对于小伙伴们的学习，我想说的是，你看完视频后一定要动手去敲写代码，这样你才能理解并记住。我们第二季的课程也已经在准备中了，第二季我们将讲解Vue的全局API。</p>
+    <script type="text/javascript">
+       var app = new Vue({
+           el: '#app',
+           data:{
+              imgUrl:"https://www.baidu.com/img/bd_logo1.png",
+              link:"https://www.baidu.com",
+              mymessage:"第一次给的数值"
+           }
+       });
+       var ipp = new Vue({
+           el:'#ipp',
+           data:{
+            className:"miaoshu",
+            flag:true,
+            colorC: "colorS",
+            fontSizeC:"fontSizeS",
+            redA:"red",
+            fonta:"20px",
+            isOk:false,
+            styleObject:{
+                "color":"green",
+                "font-weight": "bold"
+            }
+            
+           }
+       });
+    </script>
+</body>
+</html>

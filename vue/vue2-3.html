@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue.set全局操作 - vue第二季 </title>
+    <script src="js/vue.js"></script>
+    <style type="text/css">
+     body{ width: 80%; margin: 0 auto;}
+     p{ line-height: 2.0;}
+     p span{ color: darkcyan; font-weight: bold; line-height: 1.6;}
+    </style>
+</head>
+<body>
+    <h4>Vue.set全局操作</h4>
+    <div id="app">
+        目前得分：{{count}}
+        <button @click="jiaFen">加分</button>
+        <hr>
+        <P >
+            是谁： <span>{{arr[0]}}</span>  ？
+        </P>
+        <ul>
+            <!-- 思考：如果想添加索引，该怎么打印 -->
+            <li v-for="key in arr">
+                {{key}}
+            </li>
+        </ul>
+    </div>
+    <p>Vue.set 的作用就是在构造器外部操作构造器内部的数据、属性或者方法。比如在vue构造器内部定义了一个count为1的数据，我们在构造器外部定义了一个方法，要每次点击按钮给值加1.有三种方法实现如上。</p>
+    <hr> <hr>
+    <h4>三、为什么要有Vue.set的存在?</h4>
+    <p>
+        由于Javascript的限制，Vue不能自动检测以下变动的数组。
+        <br>
+        *当你利用索引直接设置一个项时，vue不会为我们自动更新。
+        <br>
+        *当你修改数组的长度时，vue不会为我们自动更新。
+    <br>
+    </p>
+    
+    <script type="text/javascript">
+       function jiaFen(){
+           //第一种用法
+          // app.count++;
+           //outData.count++;
+           //Vue.set(outData, 'count', 6); //貌似Vue没用啊
+
+           //看看实际用处  
+            //app.arr[0] = "Panda-jspang";   // 改变数字第一个值 不起作用  当DOM不更新的时候
+           Vue.set(app.arr, 0,'Panda-jspang');
+
+       }
+       //外部数据
+       var outData = {
+          count:1,
+          arr:["Panda","Jspang","Wangsen"]
+          //.....
+       };
+       var app = new Vue({
+           el: "#app",
+        //    data:{
+        //        count:1
+
+        //    }
+            data:outData
+       });
+    </script>
+    
+
+</body>
+</html>

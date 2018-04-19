@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Component 初识组件 - vue第二季 </title>
+    <script src="js/vue.js"></script>
+    <style type="text/css">
+     body{ width: 80%; margin: 0 auto;}
+     p{ line-height: 2.0;}
+     p span{ color: darkcyan; font-weight: bold; line-height: 1.6;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h4>1. 全局化注册组件</h4>
+        <p>全局化就是在构造器的外部用Vue.component来注册, 页面中调用也需要放到vue的作用域里</p>
+        □全局组件：
+        <jspang></jspang>
+        <h4>2. 局部组件</h4>
+        <panda></panda>
+    </div>
+    <div id="app2">
+        <h4>3. 全局的在哪个作用域里都起作用</h4>
+        <jspang></jspang>
+    </div>
+    <xmp>
+        <script type="text/javascript">
+            var app=new Vue({
+                el:'#app',
+                components:{
+                    "panda":{
+                        template:`<div style="color:red;">局部注册的panda标签</div>`
+                    }
+                }
+            })
+        </script>
+    </xmp>
+    <p>
+        局部注册组件局部注册组件和全局注册组件是向对应的，局部注册的组件只能在组件注册的作用域里进行使用，其他作用域使用无效。<br>
+        <span>从代码中你可以看出局部注册其实就是写在构造器里，但是你需要注意的是，构造器里的components 是加s的，而全局注册是不加s的。</span>
+    </p>
+    <h4>4. 组件和指令的区别</h4>
+    <p>组件注册的是一个标签，而指令注册的是已有标签里的一个属性。在实际开发中我们还是用组件比较多，指令用的比较少。因为指令看起来封装的没那么好，这只是个人观点.</p>
+    <script type="text/javascript">
+       Vue.component('jspang',{
+           template: `<p>千山鸟飞绝，万径人踪灭。<span>孤舟蓑笠翁</span>，独钓寒江雪。</p>`
+       });
+       var app = new Vue({
+           el: '#app',
+           data:{
+           },
+           components:{
+               'panda':{
+                   template:`<p>春眠不觉晓，处处闻啼鸟。<span>夜来风雨声，</span>花落知多少。</p>`
+               }
+           }
+       });
+       new Vue({
+           el:'#app2'
+       });
+    </script>
+</body>
+</html>

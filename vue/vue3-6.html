@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Extends Option  扩展选项 - vue第三季 </title>
+    <script src="js/vue.js"></script>
+    <style type="text/css">
+     body{ width: 80%; margin: 0 auto;}
+     p span{ color: darkcyan; font-weight: bold; line-height: 1.6;}
+     h4{ margin-top: 30px;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h4>Extends Option  扩展选项</h4>
+        <p>${ message }</p>
+        <p><button @click="add">add</button></p>
+        <p>当扩展方法和构造器的方法重名时，扩展的方法无法展现，也就是不起作用。</p>
+    </div>
+    <script type="text/javascript">
+        var bbb={
+            created:function(){
+                console.log("我是被扩展出来的 creat");
+            },
+            methods:{
+                add:function(){
+                    console.log('我是被扩展出来的方法！ add');
+                }
+            }
+        };
+        var app=new Vue({
+            el:'#app',
+            data:{
+                message:'hello Vue!'
+            },
+            extends:bbb,  //扩展这个位置只能加一个
+            methods:{
+                add:function(){
+                    console.log('我是原生方法 add');
+                }
+            },
+            created:function(){
+                console.log("我是原生的 creat");
+            },
+            
+            delimiters:['${','}']
+        })
+        
+          
+    </script>
+</body>
+</html>

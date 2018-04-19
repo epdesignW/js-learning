@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-model指令 - vue第一季 </title>
+    <script src="js/vue.js"></script>
+    <style type="text/css">
+     #app { width: 80%; margin: 0 auto; line-height: 2.0;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        输入的用户名是：<span v-text="uname"></span><br>
+        <input name="username" v-model="uname" placeholder="请输入用户名" /> 
+        <hr>
+        <textarea name="notes" id="" cols="30" rows="10" v-model="uname"></textarea>
+        <h6>多选按钮绑定一个值：</h6>
+        <input type="checkbox" name="" id="aihao" v-model="isTure">
+        <label for="aihao">{{isTure}}</label>
+
+        <h6>多选按钮绑定一个数组</h6>
+        <input type="checkbox" name="" id="football" value="football"  v-model="hobby">
+        <label for="football">Football</label>
+        <input type="checkbox" name="" id="basketball" value="basketball" v-model="hobby">
+        <label for="basketball">Basketball</label>
+        <input type="checkbox" name="" id="tennisball" value="tennisball" v-model="hobby">
+        <label for="tennisball">Tennisball</label>
+        <p>{{hobby}}</p>
+
+        <h6>单选按钮</h6>
+        <input type="radio" name="sex" id="man" value="男" v-model="sex">
+        <label for="man">男</label>
+        <input type="radio" name="sex" id="woman" value="女" v-model="sex">
+        <label for="woman">女</label>
+        <br>
+        性别：<span v-text="sex"></span>
+
+        <br>
+        <P style="color:darkcyan;">v-model指令，我理解为绑定数据源。就是把数据绑定在特定的表单元素上，可以很容易的实现双向数据绑定。</P>
+    </div>
+    <script type="text/javascript">
+       var app = new Vue({
+           el: '#app',
+           data:{
+              uname:"",
+              isTure:true,
+              hobby:[],
+              sex:"请选择性别"
+           }
+          
+       });
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue.extend构造器的延伸 - vue第二季 </title>
+    <script src="js/vue.js"></script>
+    <style type="text/css">
+     body{ width: 80%; margin: 0 auto;}
+     p span{ color: darkcyan; font-weight: bold; line-height: 1.6;}
+     a{  text-decoration: none; color:blue; }
+     #app1 a{ border: 1px solid #ccc; display: block; padding: 30px;}
+    </style>
+</head>
+<body>
+    <div id="app1">
+        <h4>Vue.extend 跟组件无关的用途</h4>
+        <p>我们想象一个需求，需求是这样的，要在博客页面多处显示作者的网名，并在网名上直接有链接地址。</p>
+        <author></author>
+    </div>
+    <p>
+        简单讲：当在模板中遇到该组件名称作为<span>标签</span>的自定义元素时，会自动调用“扩展实例构造器”来生产组件实例，并挂载到自定义元素上。
+    </p>
+    <author1></author1>
+    <p>Vue.extend 返回的是一个<span>“扩展实例构造器”</span>,也就是预设了部分选项的Vue实例构造器。经常服务于Vue.component <span>用来生成组件</span></p>
+    <hr><hr>
+    <xmp>
+            var authorExtend = Vue.extend({
+                template:"<p><a :href='authorUrl'>{{authorName}}</a></p>",
+                data:function(){
+                    return{
+                        authorName:'JSPang',
+                        authorUrl:'http://www.jspang.com'
+                    }
+                }
+            });
+            new authorExtend().$mount('author');
+    </xmp>
+    <script type="text/javascript">
+       var authorExtend = Vue.extend({
+           template:`<a :href="authorUrl" target="_blank">{{authorName}}</a>`,
+           data:function(){
+                return{
+                    authorUrl:"http://www.zhangxinxu.com/wordpress/",
+                    authorName:"张鑫旭",
+                }
+            } 
+       });
+       //按需添加多个实例
+       new authorExtend().$mount("author");
+       new authorExtend().$mount("author1");
+       
+    </script>
+</body>
+</html>

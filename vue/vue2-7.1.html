@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Component 组件props 属性设置  - vue第二季 </title>
+    <script src="js/vue.js"></script>
+    <style type="text/css">
+     body{ width: 80%; margin: 0 auto;}
+     p span{ color: darkcyan; font-weight: bold; line-height: 1.6;}
+     h4{ margin-top: 40px;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h4>1. 定义属性并获取属性值</h4>
+        <panda chandi="中国·四川" food="竹子" price="国宝本无价"></panda>
+
+        <h4>2. 在构造器里向组件中传值</h4>
+        <panda v-bind:chandi="chandi" v-bind:food="food" :price="price"></panda>
+
+    </div>
+
+    <script type="text/javascript">
+       var app = new Vue({
+           el: '#app',
+           data:{
+              chandi:'China Sichuan',
+              food:'bamboo',
+              price:'priceless'
+           },
+           components:{
+               'panda':{
+                   template:`<p>熊猫from<span>{{chandi}}</span>,喜欢吃:<span>{{food}}</span>,一只熊猫的价格：<span>{{price}}</span></p>`,
+                   props:['chandi','food','price']
+               }
+           }
+       });
+    </script>
+</body>
+</html>

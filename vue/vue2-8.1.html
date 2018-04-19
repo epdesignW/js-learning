@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Component 组件父子组件的嵌套  - vue第二季 </title>
+    <script src="js/vue.js"></script>
+    <style type="text/css">
+     body{ width: 80%; margin: 0 auto;}
+     p span{ color: darkcyan; font-weight: bold; line-height: 1.6;}
+     h4{ margin-top: 40px;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h4>Component 组件父子组件的嵌套</h4>
+        <jspang></jspang>
+    </div>
+
+    <script type="text/javascript">
+       var street = {
+           template:`<span>宽窄巷子</span>`
+       };
+       var city = {
+           template:`<p>四川<street></street></p>`,    // template是标签开头的，去掉<p></p>那四川就不会显示了
+           components:{
+               'street':street
+           }
+       };
+       var jspang = {
+           template:`<div>技术胖来自:<city></city></div>`,
+           components:{
+               'city':city
+           }
+       };
+       
+       var app = new Vue({
+           el: '#app',
+           //一个组件包含，模板，属性....
+           components:{ //这个位置有s
+               'jspang':jspang 
+                   
+               }
+          
+       });
+    </script>
+</body>
+</html>

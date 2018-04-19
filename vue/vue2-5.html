@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Template 制作模版 - vue第二季 </title>
+    <script src="js/vue.js"></script>
+    <style type="text/css">
+     body{ width: 80%; margin: 0 auto;}
+     p span{ color: darkcyan; font-weight: bold; line-height: 1.6;}
+     .shi{ padding:15px 30px; border: 5px dashed #ccc;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h4>Template 制作模版</h4>
+        <h5>1. 直接在构造器里的template选项后边编写。这种写法比较直观，但是如果模板html代码太多，不建议这么写。</h5>
+        <div class="shi">
+            <div id="shi"></div>
+            <p>这里需要注意的是模板的标识不是单引号和双引号，而是，就是Tab上面的键。</p>
+        </div>
+        <h5>2. 写在&lt;template&gt;标签里的模板</h5>
+        <template id="temp2" class="shi">
+             <p>千山鸟飞绝，万径人踪灭。<span>孤舟蓑笠翁</span>，独钓寒江雪。</p>
+        </template>
+        <h5>3. 写在&lt;script&gt;标签里的模板</h5>
+        <script type="x-template" id="temp3">
+            <p>十里平湖霜满天，寸寸青丝愁华年。对月形单望相护，只羡鸳鸯不羡仙。</p>
+        </script>
+        <br><br>
+        <hr><hr>
+        <p>Template的三种写法，以后学习到vue-cli的时候还会学到一种xxx.vue的写法。</p>
+    </div>
+    <p>
+        
+    </p>
+    <script type="text/javascript">
+       new Vue({
+           el: '#shi',
+           data:{
+               message:"hello world!",
+           },
+           template:`<p>春眠不觉晓，处处闻啼鸟。<span>夜来风雨声，</span>花落知多少。</p>` ,
+           
+       });
+       new Vue({
+           el: '#temp2',
+           template: "#temp2"   // <template id="temp2"></template>
+       });
+       new Vue({
+           el: '#temp3',
+           template: "#temp3"  
+            // script type="x-template" id="temp3">/script
+       });
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>slot是标签的内容扩展 - vue第四季 </title>
+    <script src="js/vue.js"></script>
+    <style type="text/css">
+     body{ width: 80%; margin: 0 auto;}
+     p span{ color: darkcyan; font-weight: bold; line-height: 1.6;}
+     h4{ margin-top: 30px;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h4>slot是标签的内容扩展</h4>
+        <p>实例的作用就是给原生的或者其他javascript框架一个融合的接口或者说是机会，让Vue和其他框架一起使用。</p>
+        <author>
+            <span slot="authorName">{{authorData.authorName}}</span>
+            <span slot="bolgUrl">{{authorData.bolgUrl}}</span>
+        </author>
+    </div>
+    <template id="authorT">
+        <!-- 最外层要有一个元素包裹 -->
+        <ul>
+            <li>作者：<slot name="authorName"></slot></li>
+            <li>博客：<slot name="bolgUrl"></slot></li>
+        </ul>
+    </template>
+    <script type="text/javascript">
+          // var authorT = {
+        //        template:'#authorT'
+        //    } ;
+           var app = new Vue({
+           el: '#app',
+           data:{
+               authorData:{
+                   authorName:'张鑫旭',
+                   bolgUrl:'http://www.baidu.com'
+               }
+           },
+           components:{   //单词拼写错误，不报错哇  conmponents
+               'author':{ //组件名称                                                         
+                 template:'#authorT'   // authorT的模板要放到作用域#app外面的
+               } 
+           }
+
+
+          
+       });
+       
+       
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Component 组件父子组件的嵌套  - vue第二季 </title>
+    <script src="js/vue.js"></script>
+    <style type="text/css">
+     body{ width: 80%; margin: 0 auto;}
+     p span{ color: darkcyan; font-weight: bold; line-height: 1.6;}
+     h4{ margin-top: 40px;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h4>Component 组件父子组件的嵌套</h4>
+        <jspang></jspang>
+
+    </div>
+
+    <script type="text/javascript">
+       //从父子组件可以看到VUE增量的开发模式
+       var street ={
+            template:`<span>宽窄巷子</span>`,
+            
+       };
+       var city = {
+           template:`<p>四川成都<street></street></p>`,
+           components:{
+               'street':street
+           }
+       };
+       var jspangInfo = {
+           template: 
+           `
+           <div>技术胖来自：<city></city></div>
+           `,
+           components:{
+               'city':city
+           }
+       };
+       var app = new Vue({
+           el: '#app',
+           components:{
+               'jspang':jspangInfo
+           }
+       });
+    </script>
+</body>
+</html>

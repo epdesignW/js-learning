@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Watch 选项 监控数据 - vue第三季 </title>
+    <script src="js/vue.js"></script>
+    <style type="text/css">
+     body{ width: 80%; margin: 0 auto;}
+     p span{ color: darkcyan; font-weight: bold; line-height: 1.6;}
+     h4{ margin-top: 30px;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h4>Watch 选项 监控数据</h4>
+        <p>数据变化的监控经常使用，我们可以先来看一个简单的数据变化监控的例子。例如天气预报的穿衣指数，它主要是根据温度来进行提示的，当然还有其它的，咱们就不考虑了。</p>
+        <hr>
+        <p>
+            穿衣指数：<span>{{suggestion}}</span><br />
+            当前温度：{{wendu}}   <br>
+            <button @click="shengwen">升温</button>
+            <button @click="jiangwen">降温</button>     
+        </p>  
+    </div>
+    <p>
+         <h4>用实例属性写watch监控</h4>
+         <p>有些时候我们会用实例属性的形式来写watch监控。也就是把我们watch卸载构造器的外部，这样的好处就是降低我们程序的耦合度，使程序变的灵活。</p>
+    </p>
+    <script type="text/javascript">
+       var suggestion=['T恤短袖','衬衫和夹克是绝配','棉衣羽绒服'];
+       var app = new Vue({
+           el: '#app',
+           data:{
+               suggestion:'衬衫和夹克是绝配',
+               wendu:10
+           },
+           methods:{
+               shengwen:function(){
+                   this.wendu++;
+               },
+               jiangwen:function(){
+                   this.wendu--;
+               }
+           },
+           //数据监控
+            //    watch:{
+            //       wendu:function(newVal,oldVal){ //参数两个数值
+            //            if(newVal>=25){
+            //                this.suggestion = suggestion[0];
+            //            }else if(newVal<25&&newVal>=10){
+            //              this.suggestion = suggestion[1];
+            //            }else{
+            //              this.suggestion = suggestion[2];
+            //            }
+            //       }
+            //    }
+       });
+         //数据监控用实例属性写的好处是低耦合
+         app.$watch('wendu',function(newVal,oldVal){
+            if(newVal>=25){
+                this.suggestion = suggestion[0];
+            }else if(newVal<25&&newVal>=10){
+                this.suggestion = suggestion[1];
+            }else{
+                this.suggestion = suggestion[2];
+            }
+         });
+    </script>
+</body>
+</html>

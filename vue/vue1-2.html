@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-if v-else v-show --- vue第一季 </title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <h2 style="text-align:center;">v-if:是vue 的一个内部指令，指令用在我们的html中。</h2>
+    <div id="app">
+        <div v-if="isLogin">你好，JSP，欢迎登陆网站！</div>
+        <div v-else>请登陆</div>
+        <hr>
+        <p style=" color:darkcyan; ">v-if： 判断是否加载，可以减轻服务器的压力，在需要时加载。<br />
+           v-show：调整css dispaly属性，可以使客户端操作更加流畅。
+        </p>
+        <div v-show="isShow">决定是否需要展现的内容v-show</div>
+    </div>
+    <script type="text/javascript">
+       var app = new Vue({
+           el: '#app',
+           data:{
+               //message:"hello world!",
+               isLogin: true ,
+               isShow:false
+           }
+       });
+    </script>
+</body>
+</html>

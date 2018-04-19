@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>slot是标签的内容扩展 - vue第一季 </title>
+    <script src="js/vue.js"></script>
+    <style type="text/css">
+     body{ width: 80%; margin: 0 auto;}
+     p span{ color: darkcyan; font-weight: bold; line-height: 1.6;}
+     h4{ margin-top: 30px;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <author>
+            <span slot="authorName">{{authorData.authorName}}</span>
+            <span slot="blogUrl">{{authorData.blogUrl}}</span>
+        </author>
+    </div>
+    <template id="authorT">
+         <div>
+             <ul>
+                 <li>作者：<slot name="authorName"></slot></li>
+                 <li>博客：<slot name="blogUrl"></slot></li>                 
+             </ul>
+         </div>
+    </template>
+    <script type="text/javascript">
+       var authorT = {
+           template:'#authorT'
+       };
+       var app = new Vue({
+           el: '#app',
+           data:{
+              authorData:{
+                  authorName:'jspang',
+                  blogUrl:'http://jspang.com/2017/04/09/vue2_4/'
+              }        
+           },
+           components:{
+               'author':authorT 
+           }
+       });
+    </script>
+</body>
+</html>

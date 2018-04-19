@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue.extend - 练习</title>
+    <script src="js/vue.js"></script>
+    <style type="text/css">
+     body{ width: 80%; margin: 0 auto;}
+     p span{ color: darkcyan; font-weight: bold; line-height: 1.6;}
+     h4{ margin-top: 30px;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <author></author>
+    </div>
+
+    <script type="text/javascript">
+       var app = new Vue({
+           el: '#app',
+
+       });
+       var authorEx = Vue.extend({
+           //v-bind绑定的属性的里面是表达式（变量）， {{}} 文本值输出
+           template:
+           `
+           <a v-bind:href="authorUrl">{{authorName}}</a>    
+           `,
+           data:function(){
+               return{
+                authorUrl:"http://baidu.com/",
+                authorName:"张鑫旭"
+               }
+           }
+       });
+       new authorEx().$mount('author');
+    </script>
+</body>
+</html>

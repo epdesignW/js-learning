@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>computed Option  计算选项 - vue第三季 </title>
+    <script src="js/vue.js"></script>
+    <style type="text/css">
+     body{ width: 80%; margin: 0 auto;}
+     p span{ color: darkcyan; font-weight: bold; line-height: 1.6;}
+     h4{ margin-top: 30px;}
+     #app{ border: 1px solid red; overflow: hidden;}
+     #app ul { width: 100%;}
+     #app ul li{ float: left; list-style: none; width: 21%; padding:0 2%;}
+     #app ul li img{ width: 100%; }
+     #app ul li a{ color: #4c4c4c; font-size: 12px; text-decoration: none;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h4>computed Option  计算选项</h4>
+        <p><span>computed</span> 的作用主要是对原数据进行改造输出。改造输出：包括格式的编辑，大小写转换，顺序重排，添加符号......</p>
+        <ul>
+            <li v-for="product in goods">
+                <a v-bind:href="product.links">
+                    <img v-bind:src="product.imgUrl" />
+                    <p>
+                        <h5>{{product.proName}}</h5>
+                        <span>{{newPrice}}</span>
+                    </p>
+                </a>
+            </li>
+        </ul>
+        <p><span>新闻：</span></p>
+        <ul>
+            <li v-for="p in newsList">
+                <p>
+                    <h5>{{p.title}}</h5>
+                    <span>{{p.date}}</span>
+                </p>
+            </li>
+        </ul>
+        <h4>新闻顺序调整后：</h4>
+        <ul>
+            <li v-for="p1 in renewsList">
+                <p>
+                    <h5>{{p1.title}}</h5>
+                    <span>{{p1.date}}</span>
+                </p>
+            </li>
+        </ul>
+
+
+    </div>
+    <p>
+        <span>总结：</span>computed 属性是非常有用，在输出数据前可以轻松的改变数据。所以说这节课的代码必须要多敲几遍，加深印象。
+    </p>
+    <script type="text/javascript">
+        var goodsList = [
+            {"proName":"Full Aluminium Magnesium Luggage",'price':249.00,"imgUrl":"http://iuiga.oss-ap-southeast-1.aliyuncs.com/uploads/skuimg/20170717/20170717163652_591.png" ,'links': "https://iuiga.sgshop.club/Travel-Outdoor/Luggage/Full-Aluminium-Magnesium-Luggage-165-551.html"},
+            {"proName":"Basic Daily Quilt Cover Set",'price':56.00,"imgUrl":"http://iuiga.oss-ap-southeast-1.aliyuncs.com/uploads/skuimg/20170718/20170718164914_676.png" ,'links': "https://iuiga.sgshop.club/Home-Living/Bed-Linen/Basic-Daily-Quilt-Cover-Set-105-309.html"},
+            {"proName":"Full Aluminium Magnesium Luggage",'price':249.00,"imgUrl":"http://iuiga.oss-ap-southeast-1.aliyuncs.com/uploads/skuimg/20170717/20170717163652_591.png" ,'links': "https://iuiga.sgshop.club/Travel-Outdoor/Luggage/Full-Aluminium-Magnesium-Luggage-165-551.html"},
+            {"proName":"Basic Daily Quilt Cover Set",'price':56.00,"imgUrl":"http://iuiga.oss-ap-southeast-1.aliyuncs.com/uploads/skuimg/20170718/20170718164914_676.png" ,'links': "https://iuiga.sgshop.club/Home-Living/Bed-Linen/Basic-Daily-Quilt-Cover-Set-105-309.html"}
+        ];
+        var newsList=[
+            {title:'香港或就“装甲车被扣”事件追责 起诉涉事运输公司',date:'2017/3/10'},
+            {title:'日本第二大准航母服役 外媒：针对中国潜艇',date:'2017/3/12'},
+            {title:'中国北方将有明显雨雪降温天气 南方阴雨持续',date:'2017/3/13'},
+            {title:'起底“最短命副市长”：不到40天落马，全家被查',date:'2017/3/23'}
+        ];
+        var app = new Vue({
+           el: '#app',
+           data:{
+               prices:100,
+               goods:goodsList
+           },
+           computed:{
+               newPrice:function(){
+                   return this.prices = '$' + this.prices; 
+               },
+               renewsList:function(){
+                 //return this.newsList.reverse();
+                // return this.newsList.reverse();    //为什么不起作用
+               }
+           }
+       });
+    </script>
+</body>
+</html>

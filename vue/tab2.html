@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />		
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">		
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,width=device-width">
+		<meta name="apple-mobile-web-app-title" content="Vue选项卡">
+		<title>Vue实现选项卡</title>
+		<script type="text/javascript" src="js/vue.js"></script>
+	</head>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		
+		.box {
+			width: 800px;
+			height: 200px;
+			margin: 0 auto;
+			border: 1px solid #000;
+			position: relative;
+		}
+		
+		.tabs li {
+			float: left;
+			margin-right: 8px;
+			width: 33.33%;
+			list-style: none;
+			padding: 0; 
+			margin: 0;
+		}
+		
+		.tabs .tab-link {
+			display: block;
+			width: 100%;
+			height: 49px;
+			text-align: center;
+			line-height: 49px;
+			background-color: darkcyan;
+			color: #fff;
+			text-decoration: none;
+		}
+		
+		.tabs .tab-link.active {
+			height: 47px;
+			border-bottom: 5px solid #000;
+			transition: .3s;
+		}
+		
+		.cards {
+			float: left;
+		}
+		
+		.cards .tab-card {
+			display: none;
+			width: 100%; 
+			height: 146px;
+			position: absolute; left: 0;
+			top:53px;
+		}
+		.cards .tab-card.active{
+			display: block;
+			background: #f4f4f4;
+		}
+		.clearfix:after {
+			content: "";
+			display: block;
+			height: 0;
+			clear: both;
+		}
+		
+		.clearfix {
+			zoom: 1;
+		}
+	</style>
+	<body>
+		<div id="app" class="box">
+			<ul class="tabs clearfix">
+				<li v-for="(tabName,index) in tabNames">
+					<a href="javascript:void(0)" class="tab-link" @click="tabsSwitch(index)" :class="{active:tabName.flag}">{{tabName.name}}</a>
+				</li>
+			</ul>
+			<div class="cards">
+				<div v-for="(tabCon,index) in tabCons" class="tab-card" :class="{active:tabCon.flag}">{{tabCon.neirong}}</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		var app = new Vue({
+			el: "#app",
+			data: {
+				tabNames:[
+					{name:'HTML',flag:true},
+					{name:'CSS',flag:false},
+					{name:'JS',flag:false}
+				],
+				tabCons:[
+					{neirong:'这是HTML的内容',flag:true},
+					{neirong:'这是CSS的内容',flag:false},
+					{neirong:'这是JS的内容',flag:false}
+				],
+				active:false,
+			},
+			methods: {
+				tabsSwitch: function(tabIndex) {
+                    var tabCons = document.querySelectorAll(".tab-card"),
+					//tabNames = document.querySelectorAll(".tab-link"),
+					len = tabCons.length;  //获取长度
+					for(var i=0;i<len;i++){
+                        tabCons[i].style.display = "none";
+						this.tabCons[i].flag = "false";
+						this.tabNames[i].flag = false;   //this的理解
+					}
+					tabCons[tabIndex].style.display = "block";
+					this.tabCons[tabIndex].flag = true;
+					this.tabNames[tabIndex].flag = true;
+                    
+					console.log(tabCons[i].flag)
+					//调试打印
+					// console.log(app);
+					// console.log(this);
+					// console.log(app === this)
+				}
+			}
+		
+			
+		})
+	</script>
+
+</html>

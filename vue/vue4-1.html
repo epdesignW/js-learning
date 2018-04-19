@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实例入门-实例属性 - vue第四季 </title>
+    <script src="js/vue.js"></script>
+    <script src="js/jquery1.9.1.min.js"></script>
+    <style type="text/css">
+     body{ width: 80%; margin: 0 auto;}
+     p span{ color: darkcyan; font-weight: bold; line-height: 1.6;}
+     h4{ margin-top: 30px;}
+    </style>
+</head>
+<body>
+     
+    <div id="app">
+        <h4>实例入门-实例属性</h4>
+        <p>实例的作用就是给原生的或者其他javascript框架一个融合的接口或者说是机会，让Vue和其他框架一起使用。</p>
+        <div id="my1">{{message}}</div>
+        <h4>实例调用自定义方法</h4>
+        <p>作业：利用console.log把<span>app</span>打印出来，看看里边到底包含了哪些属性和方法。因为里边的属性很多，这里只是简单的介绍。</p>
+    </div>
+    <p>
+    
+    </p>
+    <script type="text/javascript">
+           var app = new Vue({
+           el: '#app',
+           data:{
+               message:'hello vue!'
+           },
+           methods:{
+               add: function(){
+                   console.log('add方法');
+                   //打印实例
+                   console.log(app);
+               }
+           },
+           //在VUe中使用jQuery
+           mounted:function(){
+               $('#my1').html('<p>我是<span>jquery<span></p>');
+           }
+       });
+       //调用实例的add方法
+       app.add();
+    </script>
+</body>
+</html>

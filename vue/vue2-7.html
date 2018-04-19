@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Component 组件props 属性设置  - vue第二季 </title>
+    <script src="js/vue.js"></script>
+    <style type="text/css">
+     body{ width: 80%; margin: 0 auto;}
+     p span{ color: darkcyan; font-weight: bold; line-height: 1.6;}
+     h4{ margin-top: 40px;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h4>1. 定义属性并获取属性值</h4>
+        <panda chandi="中国·四川" food="竹子" values-of="国宝本无价"></panda>
+        <p>属性中带’-‘的处理方式,<span>小驼峰命名</span></p>
+
+        <h4>2. 在构造器里向组件中传值</h4>
+        <p> 把构造器中data的值传递给组件，我们只要进行绑定就可以了。就是我们第一季学的<span>v-bind:xxx</span>.</p>
+        <panda v-bind:chandi="address" :food="food" :values-of="price"></panda>
+    </div>
+
+    <script type="text/javascript">
+       var app = new Vue({
+           el: '#app',
+           data:{
+               address:"China SiChuan",
+               food:"bamboo",
+               price:"priceless"
+           },
+           components:{
+               "panda":{
+                   template:`<p>熊猫 from <span>{{chandi}}</span>，它的最爱：<span>{{food}}</span>， 多少钱一只：<span>{{valuesOf}}</span><br /><br />
+                   <span>(意外发现)</span> 输出下：valueOf <br><b>{{valueOf}}</b></p>`,
+                   props:['chandi','food','valuesOf']
+               }
+           }
+       });
+    </script>
+</body>
+</html>

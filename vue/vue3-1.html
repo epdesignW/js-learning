@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>propsData Option  全局扩展的数据传递 - vue第三季 </title>
+    <script src="js/vue.js"></script>
+    <style type="text/css">
+     body{ width: 80%; margin: 0 auto;}
+     p span{ color: darkcyan; font-weight: bold; line-height: 1.6;}
+     h4{ margin-top: 30px;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h4>propsData Option  全局扩展的数据传递</h4>
+        <p><span>选项：</span>就是在Vue构造器里的配置功能的前缀（Vue已经给我们定义好了），Vue有很多选项。</p>
+        <jspang></jspang>
+        <br>
+        <p>总结：propsData在实际开发中我们使用的并不多，我们在后边会学到Vuex的应用，他的作用就是在单页应用中保持状态和数据的。</p>
+    </div>
+    <p>
+        
+    </p>
+    <script type="text/javascript">
+       var authorEx = Vue.extend({
+           template:`<p>{{question}} <span>{{pets}}</span></p>`,
+           props:['pets'],
+           data:function(){
+               return{
+                question:'技术胖的宠物是什么？'
+               }
+           }
+       });
+       new authorEx({propsData:{pets:"Pander"}}).$mount("jspang");
+       var app = new Vue({
+           el:'#app'
+       });
+    </script>
+</body>
+</html>

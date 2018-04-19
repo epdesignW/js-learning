@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Methods Option  方法选项 - vue第三季 </title>
+    <script src="js/vue.js"></script>
+    <style type="text/css">
+     body{ width: 80%; margin: 0 auto;}
+     p span{ color: darkcyan; font-weight: bold; line-height: 1.6;}
+     h4{ margin-top: 30px;}
+     .score span{ color:orange; font-size: 30px; font-weight: bold;}
+     #app a{ color: #fff; text-decoration:none; display: block; width: 160px; line-height: 36px; text-align: center; background: #f60; border-radius: 5px;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="score"><span>{{num}}</span></div>
+        <button @click="jiaFen(200,$event)">加分</button>
+        <p>传值、event（交互性比较高的地方可以用）、组件调用构造器里的方法.native修饰符，构造器外部调用内部声明方法</p>
+        <h4>组件调用构造器内方法</h4>
+        <btn @click.native="jiaFen(2)"></btn>  
+        方法是定义在组件标签上的, 组件挂载进来后，标签上定义的方法属性和模板合并
+    </div>
+        <h4>在作用域外部用js原生方法调用构造器的方法</h4>
+    <p> 
+        <button onclick="app.jiaFen(300)">加分</button>
+        <span>(不推荐)</span>
+    </p>
+    <script type="text/javascript">
+       var btn = {
+           template:`<a href="#">加分</a>`
+       };
+       //new btn().$mount('btn');
+       var app = new Vue({
+           el:'#app',
+           data:{
+               num:1,
+           },
+           components:{
+               'btn':btn
+           },
+           methods:{
+              // jiaFen:function(a,event){
+                jiaFen:function(a){
+                   if(a!=''){
+                      this.num += a;
+                   }else{
+                      this.num++;
+                   }
+                   console.log(event);
+               }
+           }
+       });
+    </script>
+</body>
+</html>

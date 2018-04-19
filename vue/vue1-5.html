@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-on事件监听器 - vue第一季 </title>
+    <script src="js/vue.js"></script>
+    <style type="text/css">
+     #app { width: 80%; margin: 0 auto;}
+    </style>
+</head>
+<body>
+    
+    <div id="app">
+        <p>v-on事件监听器</p>
+        <p>得分：{{score}}</p>
+        <button v-on:click="jiaFen">加分</button>
+        <button v-on:click="jianFen">减分</button>
+        <hr>
+        <p style=" color:darkcyan">v-on 就是监听事件，可以用v-on指令监听DOM事件来触发一些javascript代码。</p>
+        <p>我们的v-on 还有一种简单的写法，就是用@代替。</p>
+    </div>
+    <script type="text/javascript">
+       var app = new Vue({
+           el: '#app',
+           data:{
+              score:12
+           },
+           methods:{
+               jiaFen:function(){
+                   this.score++;
+                   //alert("ok");
+               },
+               jianFen:function(){
+                   this.score--;
+               }
+
+           }
+       });
+    </script>
+</body>
+</html>

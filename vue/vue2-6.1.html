@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Component 初识组件 - vue第二季 </title>
+    <script src="js/vue.js"></script>
+    <style type="text/css">
+     body{ width: 80%; margin: 0 auto;}
+     p{ line-height: 2.0;}
+     p span{ color: darkcyan; font-weight: bold; line-height: 1.6;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h4>1. 全局化注册组件</h4>
+        <p>全局化就是在构造器的外部用Vue.component来注册, 页面中调用也需要放到vue的作用域里</p>
+        □全局组件：
+        <jspang></jspang>
+        <h4>2. 局部组件</h4>
+        <panda></panda>
+    </div>
+    <div id="app2">
+        <h4>3. 全局的在哪个作用域里都起作用</h4>
+        <jspang></jspang>
+    </div>
+    
+   
+    <script type="text/javascript">
+       Vue.component('jspang',{
+           template:`<p>千山鸟飞绝，万径人踪灭。<span>孤舟蓑笠翁</span>，独钓寒江雪。</p>`
+       });
+       var app = new Vue({
+           el:'#app',
+           components:{
+               'panda':{
+                   template:`<p>春眠不觉晓，处处闻啼鸟。夜来风雨声，花落知多少。</p>`
+               }
+           }
+       });
+       //第二个作用域
+       new Vue({
+           el:'#app2',
+           data:{
+
+           }
+       });
+
+
+    </script>
+</body>
+</html>
