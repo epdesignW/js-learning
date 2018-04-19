@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>理解this关键词</title>
+    <style>
+       .wraper{ width: 60%; }
+       p > span{ color:darkcyan;}
+       .mt30{ margin-top:100px;}
+    </style>
+</head>
+<body>
+<div class="wraper">
+    <p><span>this的理解：</span></p>
+    <ol>
+        <li>this指的是调用函数的那个对象（如果不确定，就想办法打印console.log出来看看）</li>
+        <li>函数运行时自动生成的一个内部对象(与函数创建无关)</li>
+        <li>只能在函数内部使用</li>
+        <li>函数使用场合的不同，this的值会发生变化</li>
+        <li><hr></li>
+        
+    </ol>
+    <ol>
+        <li>纯粹的函数调用：<br>
+            <p>这是函数的最通常用法，属于全局性调用，因此this就代表全局对象Global。</p>
+        <pre>
+        var x = 1;
+        function test(){
+    　　　　this.x = 2;
+    　　　　alert(this.x);
+    　　}
+    　　test(); // 2
+        </pre>
+        </li>
+        <li>作为对象方法的调用
+            <p>函数还可以作为某个对象的方法调用，这时this就指向这个上级对象。</p>
+        <pre>
+        function test(){
+    　　　　alert(this.x);
+    　　 }
+    　　var o = {};
+    　　o.x = 1;
+    　　o.m = test;
+    　　o.m(); // 1
+        } 
+        </pre>
+        </li>
+        <li>作为构造函数调用：
+            <p>所谓构造函数，就是通过这个函数生成一个新对象（object）。这时，this就指这个新对象。</p>
+            <pre>
+            var x = 2;
+        　　function test(){
+        　　　　this.x = 1;
+        　　}
+        　　var o = new test();
+            alert(o.x);
+        　　alert(x); //2
+            </pre>
+        </li>
+        <li>apply和call里的应用（以apply为例）
+            <p>apply()是函数对象的一个方法，它的作用是改变函数的调用对象，它的第一个参数就表示改变后的调用这个函数的对象。因此，this指的就是这第一个参数。</p>
+            <p><span>案例参考：</span>array文件夹中的forEach.html 
+               <a href="../array/forEach.html" target="_blank">示例</a>
+            </p>
+        </li>
+    </ol>
+    
+    <div class="mt100">
+            <hr><p><span>内容参考：</span>http://www.ruanyifeng.com/blog/2010/04/using_this_keyword_in_javascript.html</p>
+    </div>
+</div>
+<script> 
+   var x = 1;
+   var oo ={
+       test:test
+   };
+   function test(num){
+       this.x = num;
+       console.log(this);
+       // alert("this指的是:" + this);
+       alert("this运行时生成，指向调用它的对象，而非函数本身,所以函数内x的值未改变：" + x + "而this.x的值改变了:" + this.x);
+   }
+   oo.test(3);
+   
+   //alert("函数未被调用时：" + this.x);
+   //函数使用场合的不同，this的值会发生变化
+   //test(2);
+  // alert("函数被调用后：" + this.x);
+
+
+</script>
+</body>
+</html>
