@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>es6学习笔记</title>
+    <script src="dist/index.js"></script>
+    <style> 
+    body{ width: 60%; margin:0 auto;}
+    ol li span{ color: darkcyan;}
+    </style>
+</head>
+<body>
+    Hello ECMA Script 6
+    <ol>
+        <li>let是防止你的数据污染的
+        <pre>
+        for(var i=0;i<10;i++){
+        console.log('循环体中:'+i);
+        }
+        console.log('循环体外:'+i);
+        </pre>
+        </li>
+        <li>数组解构：
+            <p>ES6允许按照一定模式，从数组和对象中提取值(从json中提取值)，对变量进行赋值，这被称为解构。解构赋值在实际开发中可以大量减少我们的代码量，并且让我们的程序结构更清晰</p>
+            <p><span>语法：</span>
+                 letl  [a,[b,c],d]=[1,[2,3],4];
+                <br>
+                如果等号两边形式不一样，很可能获得undefined或者直接报错。
+            </p>
+        </li>
+    </ol>
+</body>
+</html>
