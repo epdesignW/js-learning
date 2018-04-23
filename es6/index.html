@@ -9,6 +9,7 @@
     <style> 
     body{ width: 60%; margin:0 auto;}
     ol li span{ color: darkcyan;}
+    p{ line-height: 2.0;}
     </style>
 </head>
 <body>
@@ -29,7 +30,154 @@
                 <br>
                 如果等号两边形式不一样，很可能获得undefined或者直接报错。
             </p>
+            <p>更加详细的key参照function中数组结构示例部分(廖雪峰)</p>
         </li>
+
+        <li><span>
+            扩展运算符和rest运算符</span>，它们都是...（三个点）。它们可以很好的为我们解决参数和对象数组未知情况下的编程，让我们的代码更健壮和简洁。 <hr>
+            <p>当编写一个方法时，我们允许它传入的参数是不确定的。这时候可以使用<span>对象扩展运算符</span>来作参数，看一个简单的列子：</p>
+            <p>应用1：</p>
+            <pre>
+            function jspang(...arg){  //传入参数位置的情况下，用arguments的话就会报错，arguments是类似数组的存在
+                console.log(arg[0]);
+                console.log(arg[1]);
+                console.log(arg[2]);
+                console.log(arg[3]);
+                
+            }
+            jspang(1,2,3);   //控制台输入了 1，2,3，undefined 而不会报错
+            </pre>
+            <p>应用2：</p>
+            <pre>
+                let arr1=['www','jspang','com'];
+                //let arr2=arr1;   //这是对内存堆栈的引用，而不是真正的赋值。
+                let arr2=[...arr1];
+                console.log(arr2);
+                arr2.push('shengHongYu');
+                console.log(arr2);
+                console.log(arr1);
+            </pre>
+            <hr>
+            <p>如果你已经很好的掌握了对象扩展运算符，那么理解rest运算符并不困难，它们有很多相似之处，甚至很多时候你不用特意去区分。它也用...（三个点）来表示</p>
+            <pre>
+                function foo(a, b) {
+                    var i, rest = [];
+                    if (arguments.length > 2) {
+                        for (i = 2; i < arguments.length; i++) {
+                            rest.push(arguments[i]);
+                        }
+                    }
+                    console.log('a = ' + a);
+                    console.log('b = ' + b);
+                    console.log(rest);
+                }
+            </pre>
+        </li>
+        <li>ES6对字符串的操作，最重要的就是字符串模板，字符串模板的出现让我们再也不用拼接变量，而且支持在模板里有简单计算操作。
+         <p>
+             <span>语法：</span>${jspang}
+         </p>
+        <pre>
+            let jspang='技术胖';
+            let blog = '非常高兴你能看到这篇文章，我是你的老朋友'+jspang+'。这节课我们学习字符串模版。';
+            document.write(blog);
+            //改变后
+            let blog = `非常高兴你能看到这篇文章，我是你的老朋友${jspang}。这节课我们学习字符串模版。`;
+        </pre>
+        <p><span>对运算的支持</span></p>
+          <pre>
+            let a=1;
+            let b=2;
+            let result=`${a+b}`;
+            document.write(result);
+          </pre>
+        <p><span>查找是否存在：</span>blog.includes(jspang) <br>es5方法：blog.idnexOf(jspang); </p>
+        <p><span>判断开头/尾部是否存在：</span>blog.startsWith(jspang) / blog.endsWith(jspang) <span>注意：</span>需要注意的是：starts和ends 后边都要加s，我开始时经常写错，希望小伙伴们不要采坑。</p>
+        <p><span>复制字符串：</span>document.write('jspang|'.repeat(3));</p>
+        </li>
+        <li><span>ES6新增对数字的操作：</span>前端编程工作中对数字的操作是非常多的，如果你对数字操作的不好，就很难写出令人惊奇的程序，所以我们这节课重点学习一下ES6新增的一些数字操作方法。
+           <p>二进制声明：
+            let binary = 0B010101; <br>
+            八进制声明：
+           </p>
+           <p>Number.isFinite( )来进行数字验证，只要是数字，不论是浮点型还是整形都会返回true</p>
+           <p>NaN是特殊的非数字，可以使用Number.isNaN()来进行验证。</p>
+           <p>判断是否为整数Number.isInteger(xx)</p>
+           <p>整数转换Number.parseInt(xxx)和浮点型转换Number.parseFloat(xxx)</p>
+           <p>整数取值范围操作:整数的操作是有一个取值范围的，它的取值范围就是2的53次方 <br>
+               let a = Math.pow(2,53)-1;
+           </p>
+           <p>最大安全整数: Number.MAX_SAFE_INTEGER   /     (最小安全数：console.log(Number.MIN_SAFE_INTEGER))</p>
+           <p>安全整数判断isSafeInteger(a)</p>
+        </li>
+        <li><span>ES6中新增数组知识：</span>
+            <p><span>JSON数组格式转换：</span>JSON的数组格式就是为了前端快速的把JSON转换成数组的一种格式</p>
+            <pre>
+            let  json = {
+                '0': 'jspang',
+                '1': '技术胖',
+                '2': '大胖逼逼叨',
+                length:3
+            }
+                
+            let arr=Array.from(json);
+            console.log(arr)
+            </pre>
+            <p><span>Array.of()方法</span>它负责把一堆文本或者变量转换成数组。在开发中我们经常拿到了一个类似数组的字符串，需要使用eval来进行转换，如果你一个老手程序员都知道eval的效率是很低的，它会拖慢我们的程序。这时候我们就可以使用Array.of方法。</p>
+            <pre>
+                let arr =Array.of(3,4,5,6);
+                console.log(arr);
+                let arr =Array.of('技术胖','jspang','大胖逼逼叨');
+                console.log(arr);
+            </pre>
+            <p>find( )实例方法:</p>
+            所谓的实例方法就是并不是以Array对象开始的，而是必须有一个已经存在的数组，然后使用的方法，这就是实例方法.
+            arr.find(function(value,index,arr){ ...  }
+            <p>fill( )实例方法：fill()也是一个实例方法，它的作用是把数组进行填充，它接收三个参数，第一个参数是填充的变量，第二个是开始填充的位置，第三个是填充到的位置。</p>
+        </li>
+        <li><span>循环遍历：</span>for of  ***   for(let item of arr1){ ... } ****  for (let index of arr1.key()){ ... }*********  for(let [index,val] of arr1.entries){ ... }
+             <p>entries()实例方式生成的是Iterator形式的数组，那这种形式的好处就是可以让我们在需要时用next()手动跳转到下一个值。我们来看下面的代码：</p>
+             <pre>
+                let arr=['jspang','技术胖','大胖逼逼叨']
+                let list=arr.entries();
+                console.log(list.next().value);
+                console.log(list.next().value);
+                console.log(list.next().value);
+             </pre>
+        </li>
+        <li><span>箭头函数：</span>
+            <p>var add = (a,b) => a+b; </p>
+            <pre>
+            function add(a,b){
+                a+b;
+            }
+            </pre>
+        </li>
+        <li>
+            <span>对象的函数解构：</span>
+            <pre>
+            let preson = {
+                username:'jspang',
+                password:'123456',
+                email:'pang@163.com'
+            }
+            </pre>
+            <p>function fun({username,password,email}){ ... }  对象的根据名称找对应的</p>
+            <p>fun(preson);</p>
+        </li>
+        <li>
+            <span>数组的函数解构：</span>
+            <pre>
+                let arr = ['panda','kangaroo','tiger'];
+                function animal(...args){
+                    alert(args.length);
+                    alert(args[0]);
+                }
+                animal(..arr);
+            </pre>
+
+        </li>
+
     </ol>
 </body>
 </html>
