@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>json-初识</title>
+</head>
+<body>
+    <div class="person">
+        <ul>
+            <li>姓名：<span id="name"></span></li>
+            <li>住址：<span id="address"></span></li>
+            <li>年龄：<span id="age"></span></li>
+            <li>电话：<span id="phone"></span></li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        var person = {
+           'name': 'Tom',
+           'address': 'Newyork City',
+           'age': 20,
+           'phone': '13816524157'
+        };
+        document.getElementById("name").innerText = person.name;
+        document.getElementById("address").innerText = person.address;
+        document.getElementById("age").innerText = person.age;
+        document.getElementById("phone").innerText = person.phone;
+         
+    </script>
+</body>
+</html>

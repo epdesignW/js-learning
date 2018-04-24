@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js遍历json数组--json初识</title>
+    <style>
+     h5{ color:darkcyan; font-size: 26px; font-weight: normal; }
+    </style>
+</head>
+<body>
+    <div id="companyCon">
+        
+    </div>
+    <hr>
+    
+    <script type="text/javascript">
+      //做程序或者练习想象实际应用中的数据是怎样的，比如：首页的一个八个热销产品展示位置
+         var company = [
+            { "firstName":"BossBill" , "lastName":"Gates" },
+            { "firstName":"EmployeeGeorge" , "lastName":"Bush" }
+        ];
+        var str = '';
+        for (var key in company) {
+            str += company[key].firstName + " " + company[key].lastName + "\n"; 
+        }
+
+        document.getElementById("companyCon").innerText = str;
+    </script>
+</body>
+</html>

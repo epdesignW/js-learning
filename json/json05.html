@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js遍历json数组--json初识</title>
+    <style>
+     h5{ color:darkcyan; font-size: 26px; font-weight: normal; }
+    </style>
+</head>
+<body>
+    <div id="companyCon">
+        
+    </div>
+    <hr>
+    <code>
+ 
+    </code>
+    <script type="text/javascript">
+        //搞明白索引是数组小标还是属性名称就好了
+         var company = {
+            "boss": [
+            { "firstName":"BossBill" , "lastName":"Gates" },
+            { "firstName":"BossGeorge" , "lastName":"Bush" }
+            ],
+            "employee": [
+             {'firstName': "Ewaa",'lastName':"Lee" },
+             {'firstName': "Ella",'lastName': 'Zhao'}   
+            ]
+            };
+        var str = "";
+        for (var k in company) {
+            for (var f in company[k]) {
+                //str += company[k][f].firstName + "\n";
+                for (var p in company[k][f]) {
+                    str += p + ":" + company[k][f][p] ;
+                    if(p == "firstName"){
+                       str +=  " ------- ";
+                    }
+                }
+                str +=  "\n";;
+            }
+        }
+        document.getElementById("companyCon").innerText = str;
+    </script>
+</body>
+</html>

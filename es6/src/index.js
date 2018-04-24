@@ -1,3 +1,4 @@
+
 // var a = "global";
 // {
 //     let a = "block",   
@@ -202,8 +203,196 @@
 // });
 // alert(result);
 // 4.map
-let arr1 = [1,2,3,4,5,6];
-var arr2 = arr1.map(item=> item*item );
-alert(arr2);
+// let arr1 = [1,2,3,4,5,6,7,8,9];
+// alert(arr1.map(item => item*item ));
 //console.log(arr.map(x=>'web'));
+
+//toString方法
+//  var arr = ["panda","pig","kangaroo"];
+//  alert(arr.toString());
+//  console.log(arr.toString());
+
+//ES6中对象
+// let username = "jack",
+//     email = "1400554@qq.com";
+// let person = {username,email};
+// console.log(person);
+//对象key值构建
+// let key = 'skill';
+//自定义对象方法
+// var obj = {
+//     [key]:'web',
+//     add:function(a,b){
+//         return a+b;
+//     }
+// }
+// console.log(obj.skill);
+// console.log(obj.add(1,2));
+
+//对象的比较 Object.is()
+//对象的比较方法,以前进行对象值的比较，经常使用===来判断，比如下面的代码：
+// var obj1 = {name:'jack'};
+// var obj2 = {name:'jack'};
+// alert(obj1.name===obj2.name);
+// alert(Object.is(obj1.name,obj2.name));   //Object.is(obj1.属性，obj2.属性)
+// //区分=== 和 is方法 （===为同值相等，is()为严格相等）
+// console.log(+0 === -0);  //true
+// console.log(NaN === NaN ); //false
+// console.log(Object.is(+0,-0)); //false
+// console.log(Object.is(NaN,NaN)); //true
+// var a = {name:"李红",class:'三年二班'};
+// var b = {name:"赵龙",class:'三年二班'};
+// var c = {name:"小明",class:'三年二班'};
+// let d = Object.assign(a,b,c);
+// alert(d); //********************************************** */
+//Symbol
+// var a = new String;
+// var b = new Number;
+// var c = new Boolean;
+// var d = new Array;
+// var e = new Object; 
+// var f  = Symbol('panda');
+// //这时候我们仔细看控制台是有区别的，没有toString的是红字，toString的是黑字。
+// console.log(f);
+// console.log(f.toString());
+
+// let obj = {name:'jspang',skill:'web'};
+// let age = Symbol();  //*********************************** */
+// obj[age] = 30;
+// for(let item in obj){
+//    console.log(obj[item]);
+// }
+// console.log(obj);
+
+//set数据结构
+// let setArr = new Set(['panda','kangaroo','tiger','panda']);
+// //alert(setArr);
+// console.log(setArr);
+// //Set值的增删查
+// // setArr.add("dog");
+// // setArr.delete('panda');
+// var result = setArr.has('tiger');
+// console.log(result);
+// for .. of.. 循环
+// for(let item of setArr){
+//    console.log(item);
+// }
+// console.log(setArr.size);
+// //forEach循环
+// setArr.forEach(item=>console.log(item));
+//for...in 语句用于遍历数组或者对象的属性（对数组或者对象的属性进行循环操作）。setArr不能用
+//Weakset的生命（实际用的并不多）
+// let weakObj = new WeakSet();  //这个位置不能放值
+// let obj = {name:'jack',password:'123456'}
+// weakObj.add(obj);  //这个位置会检查对象
+// console.log(weakObj);
+
+//map数据结构
+// let json = {
+//     name:'jspang',
+//     skill:'web'
+// };
+// let json2 = {
+//     name:'wangsen',
+//     skill:'ps'
+// };
+// console.log(json.name);
+// var map  = new Map();
+// //map.set();   可以看做是键值对
+// map.set("iam",json);
+// map.set("iam2",json2);
+// console.log(map.size);  //2
+// // //map的增删查
+// // console.log(map.get("iam"));
+// // console.log(map.get("iam2"));
+// // //map.clear();
+// //map.delete(json);
+// //查看是否存在
+// console.log(map.has('iam'))
+// console.log(map.has('iam3'))
+// console.log(map);
+
+//Promise对象的使用
+//以做饭吃完洗完为例说明
+// let state = 1;
+// function step1(resolve,reject){ //这里当然你也可以改成其它名字，反正是形参嘛。不过这两个名称已经是约定俗成，最好不要改。
+//     console.log("1.开始洗菜");
+//     if(state==1){
+//        resolve("菜洗好了");
+//     }else{
+//        reject("还没洗菜啊");
+//     }
+// }
+// function step2(resolve,reject){
+//     console.log("2.坐下来吃饭");
+//     if(state==2){
+//        resolve("吃好了");
+//     }else{
+//        reject("坐下来吃饭出错");
+//     }
+// }
+// function step3(resolve,reject){
+//     console.log("3.收拾桌子");
+//     if(state==1){
+//        resolve("收拾好了");
+//     }else{
+//        reject("收拾桌子出错");
+//     }
+// }
+// new Promise(step1).then(function(val){
+//    console.log(val);
+//    return new Promise(step2);
+// }).then(function(val){
+//     console.log(val);
+//     return new Promise(step3);
+// }).then(function(val){
+//     console.log(val);
+//     return val;
+// });
+
+//类 class
+// class Coder{
+//     constructor(a,b,c,d){
+//         this.a = a;
+//         this.b = b;
+//         this.name = c;
+//         this.skill = d;
+//     }
+//     name(val){ // name 不是方法
+//         console.log(val);
+//         return val;
+//     }
+//     skill(val){
+//         console.log(this.name('技术胖')+" Skill:"+val);
+//     }
+//     add(){
+//         return this.a + this.b;
+//     }
+// }
+// //继承
+// class frontEndCoder extends Coder{
+
+// }
+
+// let coder1 = new frontEndCoder();
+// // console.log(coder1);
+// // console.log(coder1.add());
+// // console.log(coder1.name);
+// // console.log(coder1.skill);
+// coder1.name = "技术胖";
+// alert(coder1.name);
+
+
+// 模块化操作
+// import {a} from '../src/temp.js'; // Uncaught ReferenceError: require is not defined
+import {a} from 'temp.js'; 
+console.log(a);
+
+
+
+
+
+
+
+
 

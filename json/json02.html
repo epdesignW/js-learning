@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>json-初识</title>
+    <style>
+     h5{ color:darkcyan; font-size: 26px; font-weight: normal; }
+    </style>
+</head>
+<body>
+    <div class="companyCon">
+        <h3>BOSS</h3>
+        <ul>
+            <li>姓名：<span id="bName"></span></li>
+        </ul>
+        <hr>
+        <h3>Employee</h3>
+        <ul>
+            <li>姓名：<span id="eName"></span></li>
+        </ul>
+    </div>
+    <hr>
+    <code>
+ 
+    </code>
+    <script type="text/javascript">
+         var company = {
+            "boss": [
+            { "firstName":"BossBill" , "lastName":"Gates" },
+            { "firstName":"BossGeorge" , "lastName":"Bush" }
+            ],
+            "employee": [
+             {'firstName': "Ewaa",'lastName':"Lee" },
+             {'firstName': "Ella",'lastName': 'Zhao'}   
+            ]
+            }
+        document.getElementById("bName").innerText = company.boss[0].firstName + " " + company.boss[0].lastName;
+        document.getElementById("eName").innerText = company.employee[0].firstName + " " + company.employee[0].lastName;
+        var companyText = JSON.stringify(company);
+        alert(companyText);
+    </script>
+    <hr>
+    <h5>如何遍历上面json的数据？</h5>
+</body>
+</html>

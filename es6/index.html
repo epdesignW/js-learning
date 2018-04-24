@@ -177,7 +177,104 @@
             </pre>
 
         </li>
+        <li><span>对象的方法：</span>Object.is()  ***  Object.assign(a,b,c) **** var f  = Symbol('panda'); </li>
+        <li><span>Set和WeakSet数据结构:</span>
+            <p>Set 数据结构，是以数组的形式构建的</p>
+            <pre>
+            let setArr = new Set(['jspang','技术胖','web','jspang']);
+            console.log(setArr);//Set {"jspang", "技术胖", "web"}
+            </pre>
+            <p>Set不是数组，set不允许内部有重复的值，如果有只显示一个</p>
+            <p><span>WeakSet 对象</span>
+                总结：在实际开发中Set用的比较多，WeakSet用的并不多，但是他对传入值必须是对象作了很好的判断，我们灵活应用还是有一定的用处的。
+            </p>
+        </li>
+        <li><span>map数据结构：</span>
+            <p>在一些构建工具中是非常喜欢使用map这种数据结构来进行配置的，因为map是一种灵活，简单的适合一对一查找的数据结构。</p>
+            <p>我们知道的数据结构，已经有了json和set。那map有什么特点。</p>
+            <p><span>map的效率和灵活性更好</span>Json反应的速度要低于数组和map结构。而且Map的灵活性要更好，你可以把它看成一种特殊的键值对，但你的key可以设置成数组，值也可以设置成字符串，让它不规律对应起来。</p>
+            <pre>
+                let json = {
+                    name:'jspang',
+                    skill:'web'
+                }
+                console.log(json.name);
+                 
+                var map=new Map();
+                map.set(json,'iam');
+                console.log(map);
 
+            </pre>
+            <p>map在现在开发中已经经常使用，它的灵活性和高效性是我们喜欢的。开发中试着去使用map吧，你一定会喜欢上它的。</p>
+        </li>
+        <li><span>用Proxy进行预处理</span>
+            <p>钩子函数：在运行函数前初始化一些数据，在改变对象值后做一些善后处理。这些都算钩子函数</p>
+            <pre>
+             声明： new Proxy({},{});
+            </pre>
+            <p>
+                Proxy的应用可以使函数更加强大，业务逻辑更加清楚，而且在编写自己的框架或者通用组件时非常好用。Proxy涉及的内容非常多(**** 其实proxy的知识是非常多的，这里我建议看阮一峰大神的《ES6》 ****)
+            </p>
+        </li>
+        <li>
+            <span>promise对象的使用:</span>在多层嵌套回调时，写完的代码层次过多，很难进行维护和二次开发，ES6认识到了这点问题，现在promise的使用，完美解决了这个问题。那我们如何理解promise这个单词在ES5中的作用那，你可以想象他是一种承诺，当它成功时执行一些代码，当它失败时执行一些代码。它更符合人类的行为思考习惯
+            <pre>
+                let state = 1;
+                function step1(resolve,reject){ //这里当然你也可以改成其它名字，反正是形参嘛。不过这两个名称已经是约定俗成，最好不要改。
+                    console.log("1.开始洗菜");
+                    if(state==1){
+                        resolve("菜洗好了");
+                    }else{
+                        reject("还没洗菜啊");
+                    }
+                }
+                function step2(resolve,reject){
+                    console.log("2.坐下来吃饭");
+                    if(state==2){
+                        resolve("吃好了");
+                    }else{
+                        reject("坐下来吃饭出错");
+                    }
+                }
+                function step3(resolve,reject){
+                    console.log("3.收拾桌子");
+                    if(state==1){
+                       resolve("收拾好了");
+                    }else{
+                       reject("收拾桌子出错");
+                    }
+                }
+                new Promise(step1).then(function(val){
+                   console.log(val);
+                   return new Promise(step2);
+                }).then(function(val){
+                    console.log(val);
+                    return new Promise(step3);
+                }).then(function(val){
+                    console.log(val);
+                    return val;
+                });
+            </pre>
+            <p>
+                Promis在现在的开发中使用率算是最高的，而且你面试前端都会考这个对象，大家一定要掌握好。
+            </p>
+        </li>
+        <li><span>class类的使用:（再找文档学习）</span>
+            <p>
+                ES5中经常使用方法或者对象去模拟类的使用，虽然可以实现功能，但代码并不优雅，Es6提供了类的使用。
+            </p>
+            <p><span>注意:</span>我们在写类的时候和ES5的对象和构造函数要区分开来。</p>
+
+        </li>
+        <li>
+            <span>模块化操作：</span>
+            <p>在ES5中我们要进行模块华操作需要引入第三方类库，随着前后端分离，前端的业务日渐复杂，ES6为我们增加了模块话操作。模块化操作主要包括两个方面。<br></p>   
+            <pre>export :负责进行模块化，也是模块的输出。
+                import : 负责把模块引，也是模块的引入操作。
+            </pre>
+            
+
+        </li>
     </ol>
 </body>
 </html>

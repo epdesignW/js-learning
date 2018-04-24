@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>遍历json对象--json初识</title>
+</head>
+<body>
+    <h2>遍历对象</h2>
+    <div id="person"></div>
+    <script type="text/javascript">
+        var person = {"name":"冯娟","password":"123456","department":"技术部","sex":"女","old":30};
+        var str = '';
+        for (var key in person) {
+            str += key + ":" + person[key] + "\n";
+        }
+        //alert(str);
+        document.getElementById("person").innerText = str;
+    </script>
+</body>
+</html>
