@@ -1,0 +1,2 @@
+es6Ñ§Ï°£º
+http://es6.ruanyifeng.com/#docs/promise#Promise-all 
