@@ -32,8 +32,7 @@
     if (!window.console) {
         window.console = {};
     }
-    //console到底是什么，打印出来看一看
-    console.log(window.console);
+    
     //重写了console.log方法并使用，使用这个方法和新定义方法对比区分
     console.log = function(result) {
         var text = document.createTextNode(result), br = document.createElement("br");
@@ -56,16 +55,15 @@
         }
     };
     }
-   alert(this);
+   // alert(this);  //是window对象
     var database = {
     users: ["张含韵", "江一燕", "李小璐"],
     sendEmail: function (user) {
         if (this.isValidUser(user)) {
-         console.log("你好，" + user);
-         alert(this);  //上下文是window 
-         // getUserInfo("你好，" + user);   //函数参数可以是一个对象
+         //alert(this);  //上下文是 database
+         console.log("你好，"+user);
         } else {
-        console.log("抱歉，"+ user +",你不是本家人");    
+           console.log("抱歉，"+ user +",你不是本家人");    
         }
     },
     isValidUser: function (user) {
