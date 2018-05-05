@@ -32,7 +32,7 @@
     if (!window.console) {
         window.console = {};
     }
-    
+        
     //重写了console.log方法并使用，使用这个方法和新定义方法对比区分
     console.log = function(result) {
         var text = document.createTextNode(result), br = document.createElement("br");

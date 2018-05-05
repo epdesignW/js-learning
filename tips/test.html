@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        //函数调用（此处是全局调用）
+        //  //最常用，把x换做是数据data
+        //  var x = 1; 
+        //  function test(){
+        //      this.x = 2;
+        //      console.log(this);
+        //      alert(this.x);
+        //  }
+        //  window.test();  //window.test();
+
+        
+        //对象
+        // function test1(){
+        //     alert(this.x);
+        //     console.log(this);
+        // }
+        // var o = {};
+        // o.x = 1;
+        // o.fn = test1;
+        // o.fn();
+
+         
+        //构造函数
+        // var x = 1;
+        // alert(x);
+        // function test2(){
+        //     console.log(this); 
+        //     this.x = 2;
+        // }
+        // var o = new test2();
+        // alert(o.x);
+        // alert(x);
+
+        //call ,apply是函数的方法
+        //程序刷选张鑫旭的本家人
+        var arr1 = ["张三","李四","王五"];
+        arr1.forEach(function(person){
+           if(/^张/.test(person)){
+               alert(this);
+               console.log("你好，"+person);
+           }
+        },arr1);
+    </script>
+</body>
+</html>
