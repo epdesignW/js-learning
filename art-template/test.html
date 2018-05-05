@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>iuiga首页</title>
+  <style type="text/css">
+    #app{ width:90%; margin: 30px auto;}
+    #app ul { width: 100%;}
+    #app ul li{ float: left; list-style: none; width: 21%; padding:0 2%;}
+    #app ul li img{ width: 100%; }
+    #app ul li a{ color: #4c4c4c; font-size: 12px; text-decoration: none;}
+    </style>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+    <script id="goods" type="text/html">
+        <ul>
+        {{each $data.goods}}
+            <li>
+                <a href="">
+                    <img src="" />
+                    <p>
+                        <h5>{{$data.goods[$index].proName}}</h5>
+                        <span></span>
+                    </p>
+                </a>
+            </li>
+        {{/each}}
+        </ul>
+    </script>
+    <script type="text/javascript" src="js/template-web.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    
+    <script>
+        var data = {
+        goods:[
+            {"proName":"Full Aluminium Magnesium Luggage",'price':"$249.00","imgUrl":"http://iuiga.oss-ap-southeast-1.aliyuncs.com/uploads/skuimg/20170717/20170717163652_591.png" ,'links': "https://iuiga.sgshop.club/Travel-Outdoor/Luggage/Full-Aluminium-Magnesium-Luggage-165-551.html"},
+            {"proName":"Basic Daily Quilt Cover Set",'price':"$56.00","imgUrl":"http://iuiga.oss-ap-southeast-1.aliyuncs.com/uploads/skuimg/20170718/20170718164914_676.png" ,'links': "https://iuiga.sgshop.club/Home-Living/Bed-Linen/Basic-Daily-Quilt-Cover-Set-105-309.html"},
+            {"proName":"Full Aluminium Magnesium Luggage",'price':"$249.00","imgUrl":"http://iuiga.oss-ap-southeast-1.aliyuncs.com/uploads/skuimg/20170717/20170717163652_591.png" ,'links': "https://iuiga.sgshop.club/Travel-Outdoor/Luggage/Full-Aluminium-Magnesium-Luggage-165-551.html"},
+            {"proName":"Basic Daily Quilt Cover Set",'price':"$56.00","imgUrl":"http://iuiga.oss-ap-southeast-1.aliyuncs.com/uploads/skuimg/20170718/20170718164914_676.png" ,'links': "https://iuiga.sgshop.club/Home-Living/Bed-Linen/Basic-Daily-Quilt-Cover-Set-105-309.html"}
+        ]
+    };
+    var html = template("goods", this.data.goods);
+    document.getElementById('app').innerHTML = html;
+    //   $.ajax({
+    //     url: 'http://iuigaapi.sgshop.club/v1/home/home/view',
+    //     headers: {
+    //       'Accept': '	application/json',
+    //       'Authorization': 'Bearer 926447d15c1bd88e1c48825647bfb7041ef0f5de'
+    //     },
+    //     success: function(res){
+    //       console.log(res);
+    //       var html = template("goods", this.res);
+    //       document.getElementById('app').innerHTML = html;
+    //     },
+    //     error: err => {
+    //       console.log(err);
+    //     }
+        
+    //   });
+      
+    </script>
+</body>
+</html>

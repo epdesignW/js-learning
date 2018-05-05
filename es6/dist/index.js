@@ -1,8 +1,5 @@
 'use strict';
 
-var _temp = require('temp.js');
-
-console.log(_temp.a);
 // var a = "global";
 // {
 //     let a = "block",   
@@ -57,7 +54,7 @@ console.log(_temp.a);
 // console.log(arr1==arr2);   //false  [] !== []  引用类型 javascript保存的是堆栈的地址
 // console.log(arr2);
 
-// let jspang='技术胖x';
+// let jspang='技术胖';
 // let blog = '非常高兴你能看到这篇文章，我是你的老朋友技术胖。这节课我们学习字符串模版。';
 // if(blog.includes(jspang)){  // 返回true /false
 //     console.log(blog.includes(jspang));
@@ -65,14 +62,14 @@ console.log(_temp.a);
 //   }else{
 //       alert("not include");
 //   }
-//   if(blog.indexOf(jspang)){  //此方法有bug? **********************
+//   if(blog.indexOf(jspang)){  
 //       alert("indexOf方法判断是否包含： 包含");
 //       console.log(blog.indexOf(jspang));
 //   }else{
 //     alert("indexOf方法：not include");      
 //   }
 // document.write('jspang|'.repeat(3));
-//alert('jspang|'.repeat(3));
+// alert('jspang|'.repeat(3));
 
 // //二进制
 // let binary = 0b10101;
@@ -92,58 +89,39 @@ console.log(_temp.a);
 // console.log(Number.isSafeInteger(a)); //false
 
 //ES6中新增的数组知识
-// let  json = {  //这就是一个标准的JSON数组格式 ********************* 跟普通的JSON对比是在最后多了一个length属性
+// var json = { //这就是一个标准的JSON数组格式 ********************* 跟普通的JSON对比是在最后多了一个length属性
 //     '0': 'jspang',
 //     '1': '技术胖',
 //     '2': '大胖逼逼叨',
-//     length:3
-// }
-// let arr=Array.from(json);   //实际开发中这种方法还是比较常用的，毕竟节省了我们代码行数，也让我们的程序更清晰。
-// console.log(arr)
-
+//     length: 3
+// };
+// var arr = Array.from(json); //实际开发中这种方法还是比较常用的，毕竟节省了我们代码行数，也让我们的程序更清晰。
+// console.log(arr);
 //Array.of()方法
-// let arr =Array.of(3,4,5,6);
-//console.log(arr);
-// alert(arr);
-// let arr2 =Array.of('技术胖','jspang','大胖逼逼叨');
-// console.log(arr2);
-
-//findof()
+//find()
 // let arr=[1,2,3,4,5,6,7,8,9];
 // console.log(arr.find(function(value,index,arr){
 //     return value > 5;
 // }))
-
 //fill()实例方法：
-// let arr = [0,1,2,3,4,5,6,7,8,9];
-// arr.fill("jspang",0,3);
-// console.log(arr);
-
 //for of 方法
 // var arr = ["panda","pig","kangaroo"];
 // for(let [index,val] of arr.entries()){
 //    console.log(index+":"+val);
 // }
-
 // 数组的遍历方式
-// let arr=['jspang','技术胖','大胖逼逼叨']
-// let list=arr.entries();
-// console.log(arr == list);  // false
-// console.log(list);   //Array Iterator {}
-// console.log(list.next().value);
-// console.log(list.next().value);
-// console.log(list.next().value);
 
-//function add(a,b=1){   // 浏览器控制台报错，这是ES6中的一个坑，如果没人指导的话，可能你会陷进去一会。这个错误的原因就是如果你使用了默认值，再使用严谨模式的话，就会有冲突，所以我们要取消默认值的操作，这时候你在运行就正常了。
-// function add(a,b){
-//   'use strict'    //88888888888888888888888888888888
-//    if(a == 0){
-//         throw new Error('This is error')
-//     }
-//      return a+b;
-// }
 
-//console.log(add(1,2));
+function add(a,b=1){   // 浏览器控制台报错，这是ES6中的一个坑，。这个错误的原因就是如果你使用了默认值，再使用严谨模式的话，就会有冲突，所以我们要取消默认值的操作，这时候你在运行就正常了。
+function add(a,b){
+  'use strict'    //88888888888888888888888888888888
+   if(a == 0){
+        throw new Error('This is error')
+    }
+     return a+b;
+}
+
+console.log(add(1));
 //获得需要传递的参数个数
 //console.log(add.length);
 
@@ -388,3 +366,5 @@ console.log(_temp.a);
 
 // 模块化操作
 // import {a} from '../src/temp.js'; // Uncaught ReferenceError: require is not defined
+// import {a} from 'temp.js'; 
+// console.log(a);

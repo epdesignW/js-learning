@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>iuiga首页</title>
+  <style type="text/css">
+    #app{ width:90%; margin: 30px auto;}
+    #app ul { width: 100%;}
+    #app ul li{ float: left; list-style: none; width: 21%; padding:0 2%;}
+    #app ul li img{ width: 100%; }
+    #app ul li a{ color: #4c4c4c; font-size: 12px; text-decoration: none;}
+    </style>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+    <script id="goods" type="text/html">
+    <ul>
+        {{if data}}
+        {{each data.newproduct}}
+        <li>
+            <a href="">
+                <img src="{{$value.mainPic }}" />
+                <p>
+                    <h5>{{$value.name }}</h5>
+                    <span>{{$value.price }}</span>
+                </p>
+            </a>
+        </li>
+        {{/each}}
+        {{/if}}
+    </ul>
+    <div>
+       {{  }}
+    </div>
+    </script>
+    <script type="text/javascript" src="js/template-web.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script> -->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script>
+      $.ajax({
+        url: 'http://iuigaapi.sgshop.club/v1/home/home/view',
+        headers: {
+          'Accept': '	application/json',
+          'Authorization': 'Bearer 926447d15c1bd88e1c48825647bfb7041ef0f5de'
+        },
+        success: function(res){
+          // var data1 = res.data;
+          // console.log(data1);
+          var html = template("goods", res);  // 这个位置直接把data1传过去， each时候，data1.newproduct 会被认为newproduct未定义 undefined ************  ???????????????  **************
+          document.getElementById('app').innerHTML = html;
+        },
+        error: err => {
+          console.log(err);
+        }
+      });
+      
+    </script>
+</body>
+</html>

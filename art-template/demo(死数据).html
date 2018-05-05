@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>art-template遍历产品</title>
+    <style type="text/css">
+    #app{ width:90%; margin: 30px auto;}
+    #app ul { width: 100%;}
+    #app ul li{ float: left; list-style: none; width: 21%; padding:0 2%;}
+    #app ul li img{ width: 100%; }
+    #app ul li a{ color: #4c4c4c; font-size: 12px; text-decoration: none;}
+    </style>
+</head>
+<body>
+    <!-- 遍历产品 -->
+    <div id="app">
+        
+    </div>
+</body>
+
+<script id="goods" type="text/html">
+    <ul>
+    {{ set mydata =  $data.goods }}
+    {{ each mydata }}
+        <li>
+            <a href="{{ $value.links }}">
+                <img src="{{ $value.imgUrl }}" />
+                <p>
+                    <h5>{{ $value.proName }}</h5>
+                    <span>{{ $value.price }}</span>
+                </p>
+            </a>
+        </li>
+    {{/each}}
+    </ul>
+</script>
+<script type="text/javascript" src="js/template-web.js"></script>
+<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script type="text/javascript">
+    // var template = require('js/mytpl.js');
+    var data = {
+        goods:[
+            {"proName":"Full Aluminium Magnesium Luggage",'price':"$249.00","imgUrl":"http://iuiga.oss-ap-southeast-1.aliyuncs.com/uploads/skuimg/20170717/20170717163652_591.png" ,'links': "https://iuiga.sgshop.club/Travel-Outdoor/Luggage/Full-Aluminium-Magnesium-Luggage-165-551.html"},
+            {"proName":"Basic Daily Quilt Cover Set",'price':"$56.00","imgUrl":"http://iuiga.oss-ap-southeast-1.aliyuncs.com/uploads/skuimg/20170718/20170718164914_676.png" ,'links': "https://iuiga.sgshop.club/Home-Living/Bed-Linen/Basic-Daily-Quilt-Cover-Set-105-309.html"},
+            {"proName":"Full Aluminium Magnesium Luggage",'price':"$249.00","imgUrl":"http://iuiga.oss-ap-southeast-1.aliyuncs.com/uploads/skuimg/20170717/20170717163652_591.png" ,'links': "https://iuiga.sgshop.club/Travel-Outdoor/Luggage/Full-Aluminium-Magnesium-Luggage-165-551.html"},
+            {"proName":"Basic Daily Quilt Cover Set",'price':"$56.00","imgUrl":"http://iuiga.oss-ap-southeast-1.aliyuncs.com/uploads/skuimg/20170718/20170718164914_676.png" ,'links': "https://iuiga.sgshop.club/Home-Living/Bed-Linen/Basic-Daily-Quilt-Cover-Set-105-309.html"}
+        ]
+    };
+    var html = template("goods", data);
+    console.log(data);
+    document.getElementById('app').innerHTML = html;
+        
+   
+    
+ </script>
+</html>

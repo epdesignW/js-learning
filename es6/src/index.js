@@ -53,7 +53,7 @@
 // console.log(arr1==arr2);   //false  [] !== []  引用类型 javascript保存的是堆栈的地址
 // console.log(arr2);
 
-// let jspang='技术胖x';
+// let jspang='技术胖';
 // let blog = '非常高兴你能看到这篇文章，我是你的老朋友技术胖。这节课我们学习字符串模版。';
 // if(blog.includes(jspang)){  // 返回true /false
 //     console.log(blog.includes(jspang));
@@ -61,14 +61,14 @@
 //   }else{
 //       alert("not include");
 //   }
-//   if(blog.indexOf(jspang)){  //此方法有bug? **********************
+//   if(blog.indexOf(jspang)){  
 //       alert("indexOf方法判断是否包含： 包含");
 //       console.log(blog.indexOf(jspang));
 //   }else{
 //     alert("indexOf方法：not include");      
 //   }
 // document.write('jspang|'.repeat(3));
-//alert('jspang|'.repeat(3));
+// alert('jspang|'.repeat(3));
 
 // //二进制
 // let binary = 0b10101;
@@ -98,11 +98,11 @@
 // console.log(arr)
 
 //Array.of()方法
-// let arr =Array.of(3,4,5,6);
-//console.log(arr);
-// alert(arr);
-// let arr2 =Array.of('技术胖','jspang','大胖逼逼叨');
-// console.log(arr2);
+let arr =Array.of(3,4,5,6);
+console.log(arr);
+alert(arr);
+let arr2 =Array.of('技术胖','jspang','大胖逼逼叨');
+console.log(arr2);
 
 //findof()
 // let arr=[1,2,3,4,5,6,7,8,9];
@@ -385,8 +385,8 @@
 
 // 模块化操作
 // import {a} from '../src/temp.js'; // Uncaught ReferenceError: require is not defined
-import {a} from 'temp.js'; 
-console.log(a);
+// import {a} from 'temp.js'; 
+// console.log(a);
 
 
 
