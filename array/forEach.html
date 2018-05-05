@@ -27,58 +27,59 @@
     </p>
     <script>
 
-        //JS代码：
-            var eleResult = document.getElementById("result");
-            if (!window.console) {
-                window.console = {};
+    //JS代码：
+        var eleResult = document.getElementById("result");
+        if (!window.console) {
+            window.console = {};
+        }
+        //console到底是什么，打印出来看一看
+       // console.log(window.console);
+        //重写了console.log方法并使用，使用这个方法和新定义方法对比区分
+        console.log = function(result) {
+            var text = document.createTextNode(result), br = document.createElement("br");
+            eleResult.appendChild(text);
+            eleResult.appendChild(br);
+        };
+        //这个函数的效果等同于上面的console.log方法
+        function getUserInfo(result){
+            var text = document.createTextNode(result), br = document.createElement("br");
+            eleResult.appendChild(text);
+            eleResult.appendChild(br);
+        }
+    //处理forEach的IE6-8兼容 
+        if (typeof Array.prototype.forEach != "function") {
+        Array.prototype.forEach = function (fn, context) {
+            for (var k = 0, length = this.length; k < length; k++) {
+            if (typeof fn === "function" && Object.prototype.hasOwnProperty.call(this, k)) {
+                fn.call(context, this[k], k, this);
             }
-            //console到底是什么，打印出来看一看
-            console.log(window.console);
-            //重写了console.log方法并使用，使用这个方法和新定义方法对比区分
-            console.log = function(result) {
-                var text = document.createTextNode(result), br = document.createElement("br");
-                eleResult.appendChild(text);
-                eleResult.appendChild(br);
-            };
-            //这个函数的效果等同于上面的console.log方法
-            function getUserInfo(result){
-                var text = document.createTextNode(result), br = document.createElement("br");
-                eleResult.appendChild(text);
-                eleResult.appendChild(br);
             }
-        //处理forEach的IE6-8兼容 
-            if (typeof Array.prototype.forEach != "function") {
-            Array.prototype.forEach = function (fn, context) {
-                for (var k = 0, length = this.length; k < length; k++) {
-                if (typeof fn === "function" && Object.prototype.hasOwnProperty.call(this, k)) {
-                    fn.call(context, this[k], k, this);
-                }
-                }
-            };
+        };
+        }
+         alert(this);
+        var database = {
+        users: ["张含韵", "江一燕", "李小璐"],
+        sendEmail: function (user) {
+            if (this.isValidUser(user)) {
+            console.log("你好，" + user);
+            alert(this);  //上下文是database
+           // console.log(this);
+            // getUserInfo("你好，" + user);   //函数参数可以是一个对象
+            } else {
+            console.log("抱歉，"+ user +",你不是本家人");    
             }
-        alert(this);
-            var database = {
-            users: ["张含韵", "江一燕", "李小璐"],
-            sendEmail: function (user) {
-                if (this.isValidUser(user)) {
-                console.log("你好，" + user);
-                alert(this);  //上下文是window 
-                // getUserInfo("你好，" + user);   //函数参数可以是一个对象
-                } else {
-                console.log("抱歉，"+ user +",你不是本家人");    
-                }
-            },
-            isValidUser: function (user) {
-                return /^张/.test(user);   
-            }
-            };
-            // 给每个人法邮件
-            database.users.forEach(  // database.users中人遍历
-            database.sendEmail,    // 发送邮件
-            database               // 使用database代替上面database.sendEmail方法中的上下文this
-            //如果这第2个可选参数不指定，则使用全局对象代替（在浏览器是为window），严格模式下甚至是undefined.
-            );
-        </script>
+        },
+        isValidUser: function (user) {
+            return /^张/.test(user);   
+        }
+        };
+        // 给每个人法邮件
+        database.users.forEach(  // database.users中人遍历
+        database.sendEmail,    // 发送邮件
+        database               // 使用database代替上面database.sendEmail方法中的上下文this
+        //如果这第2个可选参数不指定，则使用全局对象代替（在浏览器是为window），严格模式下甚至是undefined.
+        );
+    </script>
 
 </body>
 

@@ -98,11 +98,11 @@
 // console.log(arr)
 
 //Array.of()方法
-let arr =Array.of(3,4,5,6);
-console.log(arr);
-alert(arr);
-let arr2 =Array.of('技术胖','jspang','大胖逼逼叨');
-console.log(arr2);
+// let arr =Array.of(3,4,5,6);
+// console.log(arr);
+// alert(arr);
+// let arr2 =Array.of('技术胖','jspang','大胖逼逼叨');
+// console.log(arr2);
 
 //findof()
 // let arr=[1,2,3,4,5,6,7,8,9];
@@ -156,9 +156,16 @@ console.log(arr2);
 //   console.log(email);
 //  } 
 // fun(person);
+// let person = {
+//     username:'wangsen',
+//     password:'123456'
+// };
+// function fun({password:pwd,username:uname}){  // password是匹配模式，实际变量参数是pwd，不信打印password看看
+//     console.log(pwd);
+//     console.log(uname);
 
-
-
+// }
+// fun(person);
 //数组的函数解构
 // let arr = ['panda','kangaroo','tiger'];
 // function animal(...args){  // function animal(a,b,c){ ... }

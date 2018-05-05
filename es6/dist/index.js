@@ -99,16 +99,16 @@
 // console.log(arr)
 
 //Array.of()方法
-var arr = Array.of(3, 4, 5, 6);
-console.log(arr);
-alert(arr);
-var arr2 = Array.of('技术胖', 'jspang', '大胖逼逼叨');
-console.log(arr2);
+// var arr = Array.of(3, 4, 5, 6);
+// console.log(arr);
+// alert(arr);
+// var arr2 = Array.of('技术胖', 'jspang', '大胖逼逼叨');
+// console.log(arr2);
 
 //findof()
 // let arr=[1,2,3,4,5,6,7,8,9];
 // console.log(arr.find(function(value,index,arr){
-//     return value > 5;
+//     return value > 2;
 // }))
 
 //fill()实例方法：
@@ -118,6 +118,7 @@ console.log(arr2);
 
 //for of 方法
 // var arr = ["panda","pig","kangaroo"];
+// console.log(arr.entries());
 // for(let [index,val] of arr.entries()){
 //    console.log(index+":"+val);
 // }
@@ -127,6 +128,7 @@ console.log(arr2);
 // let list=arr.entries();
 // console.log(arr == list);  // false
 // console.log(list);   //Array Iterator {}
+// console.log(list.next().value);
 // console.log(list.next().value);
 // console.log(list.next().value);
 // console.log(list.next().value);
@@ -158,7 +160,17 @@ console.log(arr2);
 //  } 
 // fun(person);
 
+// let person = {
+//     username:'wangsen',
+//     password:'123456'
+// };
+// function fun({password:pwd,username:uname}){
+//     console.log(pwd);
+//     console.log(uname);
+//     console.log(password);
 
+// }
+// fun(person);
 //数组的函数解构
 // let arr = ['panda','kangaroo','tiger'];
 // function animal(...args){  // function animal(a,b,c){ ... }
@@ -177,7 +189,7 @@ console.log(arr2);
 // console.log('username' in obj);
 // console.log('email' in obj);
 //数组判断
-// let arr1 = [,,,,,];
+// let arr1 = [1,,,,,];
 // console.log(arr1.length);  // 6, 但数组中其实全部为空值
 // console.log(0 in arr1);   // 0指的是数组下标位置是否为空
 
@@ -203,9 +215,9 @@ console.log(arr2);
 // });
 // alert(result);
 // 4.map
-// let arr1 = [1,2,3,4,5,6,7,8,9];
-// alert(arr1.map(item => item*item ));
-//console.log(arr.map(x=>'web'));
+// let arr2 = [1,2,3,4,5,6,7,8,9];
+// alert(arr2.map(item => item*item ));
+// console.log(arr2.map(x=>'web'));
 
 //toString方法
 //  var arr = ["panda","pig","kangaroo"];
@@ -219,7 +231,7 @@ console.log(arr2);
 // console.log(person);
 //对象key值构建
 // let key = 'skill';
-//自定义对象方法
+// //自定义对象方法
 // var obj = {
 //     [key]:'web',
 //     add:function(a,b){
@@ -233,18 +245,19 @@ console.log(arr2);
 //对象的比较方法,以前进行对象值的比较，经常使用===来判断，比如下面的代码：
 // var obj1 = {name:'jack'};
 // var obj2 = {name:'jack'};
-// alert(obj1.name===obj2.name);
+// alert(obj1.name===obj2.name); 
 // alert(Object.is(obj1.name,obj2.name));   //Object.is(obj1.属性，obj2.属性)
 // //区分=== 和 is方法 （===为同值相等，is()为严格相等）
 // console.log(+0 === -0);  //true
 // console.log(NaN === NaN ); //false
 // console.log(Object.is(+0,-0)); //false
 // console.log(Object.is(NaN,NaN)); //true
-// var a = {name:"李红",class:'三年二班'};
+// var a = {name:"李红",email:'1400889245@qq.com'};
 // var b = {name:"赵龙",class:'三年二班'};
 // var c = {name:"小明",class:'三年二班'};
 // let d = Object.assign(a,b,c);
-// alert(d); //********************************************** */
+// //alert(d); //********************************************** */
+// console.log(d);
 //Symbol
 // var a = new String;
 // var b = new Number;
@@ -258,19 +271,19 @@ console.log(arr2);
 
 // let obj = {name:'jspang',skill:'web'};
 // let age = Symbol();  //*********************************** */
-// obj[age] = 30;
+// obj.age = 30;
 // for(let item in obj){
 //    console.log(obj[item]);
 // }
 // console.log(obj);
 
-//set数据结构
+//set数据结构  Iterator  用 for of 循环遍历
 // let setArr = new Set(['panda','kangaroo','tiger','panda']);
 // //alert(setArr);
+// // //Set值的增删查
+// setArr.add("dog");
+// // // setArr.delete('panda');
 // console.log(setArr);
-// //Set值的增删查
-// // setArr.add("dog");
-// // setArr.delete('panda');
 // var result = setArr.has('tiger');
 // console.log(result);
 // for .. of.. 循环
@@ -296,20 +309,20 @@ console.log(arr2);
 //     name:'wangsen',
 //     skill:'ps'
 // };
-// console.log(json.name);
 // var map  = new Map();
-// //map.set();   可以看做是键值对
-// map.set("iam",json);
+//map.set();   //可以看做是键值对
+// map.set("iam1",json);
 // map.set("iam2",json2);
 // console.log(map.size);  //2
-// // //map的增删查
-// // console.log(map.get("iam"));
-// // console.log(map.get("iam2"));
-// // //map.clear();
+// // // //map的增删查
+// console.log(map.get("iam1"));
+// console.log(map.get("iam2"));
+// console.log(map);
+// // // //map.clear();
 // //map.delete(json);
-// //查看是否存在
+// // //查看是否存在
 // console.log(map.has('iam'))
-// console.log(map.has('iam3'))
+// console.log(map.has('iam1'))
 // console.log(map);
 
 //Promise对象的使用
@@ -333,7 +346,7 @@ console.log(arr2);
 // }
 // function step3(resolve,reject){
 //     console.log("3.收拾桌子");
-//     if(state==1){
+//     if(state==3){
 //        resolve("收拾好了");
 //     }else{
 //        reject("收拾桌子出错");
@@ -341,9 +354,12 @@ console.log(arr2);
 // }
 // new Promise(step1).then(function(val){
 //    console.log(val);
+//    state = 2;
 //    return new Promise(step2);
+  
 // }).then(function(val){
 //     console.log(val);
+//     state = 3;
 //     return new Promise(step3);
 // }).then(function(val){
 //     console.log(val);
@@ -351,24 +367,24 @@ console.log(arr2);
 // });
 
 //类 class
-// class Coder{
-//     constructor(a,b,c,d){
-//         this.a = a;
-//         this.b = b;
-//         this.name = c;
-//         this.skill = d;
-//     }
-//     name(val){ // name 不是方法
-//         console.log(val);
-//         return val;
-//     }
-//     skill(val){
-//         console.log(this.name('技术胖')+" Skill:"+val);
-//     }
-//     add(){
-//         return this.a + this.b;
-//     }
-// }
+class Coder{
+    constructor(a,b,c,d){
+        this.a = a;
+        this.b = b;
+        this.name = c;
+        this.skill = d;
+    }
+    name(val){ // name 不是方法
+        console.log(val);
+        return val;
+    }
+    skill(val){
+        console.log(this.name('技术胖')+" Skill:"+val);
+    }
+    add(){
+        return this.a + this.b;
+    }
+}
 // //继承
 // class frontEndCoder extends Coder{
 

@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>this的test</title>
 </head>
 <body>
+    <h1>请看控制台</h1>
     <script type="text/javascript">
         //函数调用（此处是全局调用）
         //  //最常用，把x换做是数据data
@@ -41,15 +42,26 @@
         // alert(o.x);
         // alert(x);
 
-        //call ,apply是函数的方法
+        //call ,apply是函数的方法， 
         //程序刷选张鑫旭的本家人
-        var arr1 = ["张三","李四","王五"];
-        arr1.forEach(function(person){
-           if(/^张/.test(person)){
-               alert(this);
-               console.log("你好，"+person);
-           }
-        },arr1);
+        // var arr1 = ["张三","李四","王五"];
+        // arr1.forEach(function(person){
+        //    if(/^张/.test(person)){
+        //        alert(this);
+        //        console.log("你好，"+person);
+        //    }
+        // },arr1);
+        
+        //apply()参数为空时，默认全局调用
+        var x = 0;
+    　　function test(){
+    　　　　alert(this.x);
+    　　}
+    　　var o={};
+    　　o.x = 1;
+    　　o.m = test;
+    　　//o.m.apply(); //0
+        o.m.apply(o); //1
     </script>
 </body>
 </html>
