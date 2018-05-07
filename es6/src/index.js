@@ -348,8 +348,10 @@
 // }
 // new Promise(step1).then(function(val){
 //    console.log(val);
+//    state = 2;
 //    return new Promise(step2);
 // }).then(function(val){
+//     state = 3;
 //     console.log(val);
 //     return new Promise(step3);
 // }).then(function(val){
@@ -394,6 +396,201 @@
 // import {a} from '../src/temp.js'; // Uncaught ReferenceError: require is not defined
 // import {a} from 'temp.js'; 
 // console.log(a);
+
+
+// 学习笔记  2018-05-07
+//let和const
+// var a = [];
+// for (let i = 0; i < 10; i++) {  // let 和 var 互换
+//     a[i] = function(){
+//         console.log(i);
+//     }
+// }
+// a[6]();   //这个位置这样写的一个函数，仅仅用来理解 let即可
+
+
+//for循环还有一个特别之处，就是设置循环变量的那部分是一个父作用域，而循环体内部是一个单独的子作用域
+// for (let i = 0; i < 3; i++) {
+//     let i = 'abc';
+//     console.log(i);
+//     alert(i);
+// }
+
+//不存在变量提升
+// function test() {
+//     console.log(b);
+//     let b = 'england';   //let不存在变量提升的概念了
+// }
+//  test();
+
+//暂时性死区 只要块级作用域内存在let命令，它所声明的变量就“绑定”（binding）这个区域，不再受外部的影响。
+// function test(){ //*************  测试效果有误差  **************** 
+// var tmp = 123;
+// if(true){
+//    tmp = "abc";
+//    console.log(tmp);
+//    let tmp;
+// // console.log(tmp);
+// // tmp = 123;
+// // console.log(tmp);
+//  }
+// }
+// test();
+// function f1(){
+//     let n = 5;
+//     if(true){
+//        let n = 10;
+//        let a = "aaa";
+//     }
+//     console.log(n);
+//     console.log(a);
+// }
+// // f1();
+// const Pi = 3.1415926;
+// Pi  = 3.14;  //编译es5就会出错
+
+//对象解构赋值  区分是模式还是变量, 对象或者数组解构出来是给函数用的，理解
+// let obj = {
+//     p: [
+//         'Hello',
+//         {y:'world'}
+//     ]
+// };
+// let {p:[x,{y}]} = obj; 
+// //console.log(p);
+// console.log(x);
+// console.log(y);
+// //解构p
+// let{p} = obj;
+// console.log(p);
+//同时解构p和x, y
+// let{p,p:[x,{y}]} = obj;  //按照约定语法来 语法 语法 语法，约定的语法 ^^^^^^^^
+// console.log(p);
+// console.log(x);
+// console.log(y);
+
+// const node = {
+//     loc: {
+//         start:{
+//             line:1,
+//             column:5
+//         }
+//     }
+// };
+// let {loc,loc:{start},loc:{start:{line,column}}} = node;
+// console.log(loc);
+// console.log(start);
+// console.log(line.toString() + column.toString());
+//再看点
+// let obj = {};
+// let arr = [];
+// ({foo:obj.prop, bar:arr[0]} = {foo:123,bar:true})
+// console.log(obj);
+// console.log(arr);
+// console.log(bar);  // not defined
+//默认值生效的条件是，对象的属性值严格等于undefined。
+// var {x = 3} = {x: undefined};
+// x // 3
+// var {x = 3} = {x: null};
+// x // null
+// //如果要将一个已经声明的变量用于解构赋值，必须非常小心。
+// // 正确的写法
+// let x;
+// ({x} = {x: 1});  //这种格式也存在，解构
+
+// //用途   对象的解构赋值，可以很方便地将现有对象的方法，赋值到某个变量。
+// let { log, sin, cos } = Math;
+// //由于数组本质是特殊的对象，因此可以对数组进行对象属性的解构。
+// //此处如果不好理解，可以想下数组遍历对象，或者set数据结构
+// let arr = [1, 2, 3];
+// let {0 : first, [arr.length - 1] : last} = arr;
+// console.log(first); // 1
+// console.log(last); // 3
+
+//字符串的解构赋值
+// const [a,b,c,d,e] = 'hello';
+// console.log(a);
+// console.log(b);
+// console.log(c);
+// console.log(d);
+// console.log(e);
+// let {length} = 'hello';  //字符串对象
+// console.log(length);
+
+//数值和布尔值解构   解构赋值时，如果等号右边是数值和布尔值，则会先转为对象。
+// let {toString: s} = 123;
+// s === Number.prototype.toString // true
+// let {toString: s} = true;
+// s === Boolean.prototype.toString // true
+
+//函数参数的解构赋值
+// function add([x, y]){  //对于函数内部的代码来说，它们能感受到的参数就是x和y。
+//     return x + y;
+//   }
+// add([1, 2]); // 3
+
+
+//数组解构的用途 7
+//函数参数的默认值
+// function test1({a=1,b=2}){
+//     console.log(a);
+//     console.log(b);
+// }
+// test1({a:3});
+
+
+//字符串的扩展
+// alert(String.fromCodePoint(0x20bb7));
+// //遍历
+// for(let i of 'hello𠮷'){   //这个遍历器最大的优点是可以识别大于0xFFFF的码点
+//     console.log(i);
+// }
+
+//补全标题
+//alert("产品标题".padEnd(10,'.'));  // 默认使用空格补全长度。
+//let greeting = `\`Yo\` World!`;
+//alert(greeting);
+
+//模板字符串还可以嵌套
+
+
+let appTable = "";
+ 
+
+
+// window.onload = function(){
+//     appTable = `
+//         <table>
+//         ${addrs.map(addr => `
+//         <tr><td>${addr.first}</td>
+//         <td>${addr.last}</td></tr>
+//         `).join('')}
+//         </table>
+//     `.trim();
+//   document.getElementById("app-x").innerHTML = appTable;
+// }
+
+//改成箭头函数
+
+let addrs = [
+    {first:'Hankong',last:'5 road'},
+    {first:'Taiwan',last:'6 road'},    
+];
+
+window.onload = () => {
+    appTable = `
+        <table>
+        ${addrs.map(addr => `
+        <tr><td>${addr.first}</td>
+        <td>${addr.last}</td></tr>
+        `).join('')}
+        </table>
+    `.trim();
+  document.getElementById("app-x").innerHTML = appTable;
+}
+
+
+
 
 
 

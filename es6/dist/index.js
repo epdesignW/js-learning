@@ -99,16 +99,16 @@
 // console.log(arr)
 
 //Array.of()方法
-// var arr = Array.of(3, 4, 5, 6);
+// let arr =Array.of(3,4,5,6);
 // console.log(arr);
 // alert(arr);
-// var arr2 = Array.of('技术胖', 'jspang', '大胖逼逼叨');
+// let arr2 =Array.of('技术胖','jspang','大胖逼逼叨');
 // console.log(arr2);
 
 //findof()
 // let arr=[1,2,3,4,5,6,7,8,9];
 // console.log(arr.find(function(value,index,arr){
-//     return value > 2;
+//     return value > 5;
 // }))
 
 //fill()实例方法：
@@ -118,7 +118,6 @@
 
 //for of 方法
 // var arr = ["panda","pig","kangaroo"];
-// console.log(arr.entries());
 // for(let [index,val] of arr.entries()){
 //    console.log(index+":"+val);
 // }
@@ -128,7 +127,6 @@
 // let list=arr.entries();
 // console.log(arr == list);  // false
 // console.log(list);   //Array Iterator {}
-// console.log(list.next().value);
 // console.log(list.next().value);
 // console.log(list.next().value);
 // console.log(list.next().value);
@@ -159,15 +157,13 @@
 //   console.log(email);
 //  } 
 // fun(person);
-
 // let person = {
 //     username:'wangsen',
 //     password:'123456'
 // };
-// function fun({password:pwd,username:uname}){
+// function fun({password:pwd,username:uname}){  // password是匹配模式，实际变量参数是pwd，不信打印password看看
 //     console.log(pwd);
 //     console.log(uname);
-//     console.log(password);
 
 // }
 // fun(person);
@@ -189,7 +185,7 @@
 // console.log('username' in obj);
 // console.log('email' in obj);
 //数组判断
-// let arr1 = [1,,,,,];
+// let arr1 = [,,,,,];
 // console.log(arr1.length);  // 6, 但数组中其实全部为空值
 // console.log(0 in arr1);   // 0指的是数组下标位置是否为空
 
@@ -215,9 +211,9 @@
 // });
 // alert(result);
 // 4.map
-// let arr2 = [1,2,3,4,5,6,7,8,9];
-// alert(arr2.map(item => item*item ));
-// console.log(arr2.map(x=>'web'));
+// let arr1 = [1,2,3,4,5,6,7,8,9];
+// alert(arr1.map(item => item*item ));
+//console.log(arr.map(x=>'web'));
 
 //toString方法
 //  var arr = ["panda","pig","kangaroo"];
@@ -231,7 +227,7 @@
 // console.log(person);
 //对象key值构建
 // let key = 'skill';
-// //自定义对象方法
+//自定义对象方法
 // var obj = {
 //     [key]:'web',
 //     add:function(a,b){
@@ -245,19 +241,18 @@
 //对象的比较方法,以前进行对象值的比较，经常使用===来判断，比如下面的代码：
 // var obj1 = {name:'jack'};
 // var obj2 = {name:'jack'};
-// alert(obj1.name===obj2.name); 
+// alert(obj1.name===obj2.name);
 // alert(Object.is(obj1.name,obj2.name));   //Object.is(obj1.属性，obj2.属性)
 // //区分=== 和 is方法 （===为同值相等，is()为严格相等）
 // console.log(+0 === -0);  //true
 // console.log(NaN === NaN ); //false
 // console.log(Object.is(+0,-0)); //false
 // console.log(Object.is(NaN,NaN)); //true
-// var a = {name:"李红",email:'1400889245@qq.com'};
+// var a = {name:"李红",class:'三年二班'};
 // var b = {name:"赵龙",class:'三年二班'};
 // var c = {name:"小明",class:'三年二班'};
 // let d = Object.assign(a,b,c);
-// //alert(d); //********************************************** */
-// console.log(d);
+// alert(d); //********************************************** */
 //Symbol
 // var a = new String;
 // var b = new Number;
@@ -271,19 +266,19 @@
 
 // let obj = {name:'jspang',skill:'web'};
 // let age = Symbol();  //*********************************** */
-// obj.age = 30;
+// obj[age] = 30;
 // for(let item in obj){
 //    console.log(obj[item]);
 // }
 // console.log(obj);
 
-//set数据结构  Iterator  用 for of 循环遍历
+//set数据结构
 // let setArr = new Set(['panda','kangaroo','tiger','panda']);
 // //alert(setArr);
-// // //Set值的增删查
-// setArr.add("dog");
-// // // setArr.delete('panda');
 // console.log(setArr);
+// //Set值的增删查
+// // setArr.add("dog");
+// // setArr.delete('panda');
 // var result = setArr.has('tiger');
 // console.log(result);
 // for .. of.. 循环
@@ -309,20 +304,20 @@
 //     name:'wangsen',
 //     skill:'ps'
 // };
+// console.log(json.name);
 // var map  = new Map();
-//map.set();   //可以看做是键值对
-// map.set("iam1",json);
+// //map.set();   可以看做是键值对
+// map.set("iam",json);
 // map.set("iam2",json2);
 // console.log(map.size);  //2
-// // // //map的增删查
-// console.log(map.get("iam1"));
-// console.log(map.get("iam2"));
-// console.log(map);
-// // // //map.clear();
+// // //map的增删查
+// // console.log(map.get("iam"));
+// // console.log(map.get("iam2"));
+// // //map.clear();
 // //map.delete(json);
-// // //查看是否存在
+// //查看是否存在
 // console.log(map.has('iam'))
-// console.log(map.has('iam1'))
+// console.log(map.has('iam3'))
 // console.log(map);
 
 //Promise对象的使用
@@ -346,7 +341,7 @@
 // }
 // function step3(resolve,reject){
 //     console.log("3.收拾桌子");
-//     if(state==3){
+//     if(state==1){
 //        resolve("收拾好了");
 //     }else{
 //        reject("收拾桌子出错");
@@ -356,10 +351,9 @@
 //    console.log(val);
 //    state = 2;
 //    return new Promise(step2);
-  
 // }).then(function(val){
-//     console.log(val);
 //     state = 3;
+//     console.log(val);
 //     return new Promise(step3);
 // }).then(function(val){
 //     console.log(val);
@@ -367,24 +361,24 @@
 // });
 
 //类 class
-class Coder{
-    constructor(a,b,c,d){
-        this.a = a;
-        this.b = b;
-        this.name = c;
-        this.skill = d;
-    }
-    name(val){ // name 不是方法
-        console.log(val);
-        return val;
-    }
-    skill(val){
-        console.log(this.name('技术胖')+" Skill:"+val);
-    }
-    add(){
-        return this.a + this.b;
-    }
-}
+// class Coder{
+//     constructor(a,b,c,d){
+//         this.a = a;
+//         this.b = b;
+//         this.name = c;
+//         this.skill = d;
+//     }
+//     name(val){ // name 不是方法
+//         console.log(val);
+//         return val;
+//     }
+//     skill(val){
+//         console.log(this.name('技术胖')+" Skill:"+val);
+//     }
+//     add(){
+//         return this.a + this.b;
+//     }
+// }
 // //继承
 // class frontEndCoder extends Coder{
 
@@ -403,3 +397,185 @@ class Coder{
 // import {a} from '../src/temp.js'; // Uncaught ReferenceError: require is not defined
 // import {a} from 'temp.js'; 
 // console.log(a);
+
+
+// 学习笔记  2018-05-07
+//let和const
+// var a = [];
+// for (let i = 0; i < 10; i++) {  // let 和 var 互换
+//     a[i] = function(){
+//         console.log(i);
+//     }
+// }
+// a[6]();   //这个位置这样写的一个函数，仅仅用来理解 let即可
+
+
+//for循环还有一个特别之处，就是设置循环变量的那部分是一个父作用域，而循环体内部是一个单独的子作用域
+// for (let i = 0; i < 3; i++) {
+//     let i = 'abc';
+//     console.log(i);
+//     alert(i);
+// }
+
+//不存在变量提升
+// function test() {
+//     console.log(b);
+//     let b = 'england';   //let不存在变量提升的概念了
+// }
+//  test();
+
+//暂时性死区 只要块级作用域内存在let命令，它所声明的变量就“绑定”（binding）这个区域，不再受外部的影响。
+// function test(){ //*************  测试效果有误差  **************** 
+// var tmp = 123;
+// if(true){
+//    tmp = "abc";
+//    console.log(tmp);
+//    let tmp;
+// // console.log(tmp);
+// // tmp = 123;
+// // console.log(tmp);
+//  }
+// }
+// test();
+// function f1(){
+//     let n = 5;
+//     if(true){
+//        let n = 10;
+//        let a = "aaa";
+//     }
+//     console.log(n);
+//     console.log(a);
+// }
+// // f1();
+// const Pi = 3.1415926;
+// Pi  = 3.14;  //编译es5就会出错
+
+//对象解构赋值  区分是模式还是变量, 对象或者数组解构出来是给函数用的，理解
+// let obj = {
+//     p: [
+//         'Hello',
+//         {y:'world'}
+//     ]
+// };
+// let {p:[x,{y}]} = obj; 
+// //console.log(p);
+// console.log(x);
+// console.log(y);
+// //解构p
+// let{p} = obj;
+// console.log(p);
+//同时解构p和x, y
+// let{p,p:[x,{y}]} = obj;  //按照约定语法来 语法 语法 语法，约定的语法 ^^^^^^^^
+// console.log(p);
+// console.log(x);
+// console.log(y);
+
+// const node = {
+//     loc: {
+//         start:{
+//             line:1,
+//             column:5
+//         }
+//     }
+// };
+// let {loc,loc:{start},loc:{start:{line,column}}} = node;
+// console.log(loc);
+// console.log(start);
+// console.log(line.toString() + column.toString());
+//再看点
+// let obj = {};
+// let arr = [];
+// ({foo:obj.prop, bar:arr[0]} = {foo:123,bar:true})
+// console.log(obj);
+// console.log(arr);
+// console.log(bar);  // not defined
+//默认值生效的条件是，对象的属性值严格等于undefined。
+// var {x = 3} = {x: undefined};
+// x // 3
+// var {x = 3} = {x: null};
+// x // null
+// //如果要将一个已经声明的变量用于解构赋值，必须非常小心。
+// // 正确的写法
+// let x;
+// ({x} = {x: 1});  //这种格式也存在，解构
+
+// //用途   对象的解构赋值，可以很方便地将现有对象的方法，赋值到某个变量。
+// let { log, sin, cos } = Math;
+// //由于数组本质是特殊的对象，因此可以对数组进行对象属性的解构。
+// //此处如果不好理解，可以想下数组遍历对象，或者set数据结构
+// let arr = [1, 2, 3];
+// let {0 : first, [arr.length - 1] : last} = arr;
+// console.log(first); // 1
+// console.log(last); // 3
+
+//字符串的解构赋值
+// const [a,b,c,d,e] = 'hello';
+// console.log(a);
+// console.log(b);
+// console.log(c);
+// console.log(d);
+// console.log(e);
+// let {length} = 'hello';  //字符串对象
+// console.log(length);
+
+//数值和布尔值解构   解构赋值时，如果等号右边是数值和布尔值，则会先转为对象。
+// let {toString: s} = 123;
+// s === Number.prototype.toString // true
+// let {toString: s} = true;
+// s === Boolean.prototype.toString // true
+
+//函数参数的解构赋值
+// function add([x, y]){  //对于函数内部的代码来说，它们能感受到的参数就是x和y。
+//     return x + y;
+//   }
+// add([1, 2]); // 3
+
+
+//数组解构的用途 7
+//函数参数的默认值
+// function test1({a=1,b=2}){
+//     console.log(a);
+//     console.log(b);
+// }
+// test1({a:3});
+
+
+//字符串的扩展
+// alert(String.fromCodePoint(0x20bb7));
+// //遍历
+// for(let i of 'hello𠮷'){   //这个遍历器最大的优点是可以识别大于0xFFFF的码点
+//     console.log(i);
+// }
+
+//补全标题
+//alert("产品标题".padEnd(10,'.'));  // 默认使用空格补全长度。
+//let greeting = `\`Yo\` World!`;
+//alert(greeting);
+
+//模板字符串还可以嵌套
+
+
+var appTable = "";
+
+// window.onload = function(){
+//     appTable = `
+//         <table>
+//         ${addrs.map(addr => `
+//         <tr><td>${addr.first}</td>
+//         <td>${addr.last}</td></tr>
+//         `).join('')}
+//         </table>
+//     `.trim();
+//   document.getElementById("app-x").innerHTML = appTable;
+// }
+
+//改成箭头函数
+
+var addrs = [{ first: 'Hankong', last: '5 road' }, { first: 'Taiwan', last: '6 road' }];
+
+window.onload = function () {
+    appTable = ('\n        <table>\n        ' + addrs.map(function (addr) {
+        return '\n        <tr><td>' + addr.first + '</td>\n        <td>' + addr.last + '</td></tr>\n        ';
+    }).join('') + '\n        </table>\n    ').trim();
+    document.getElementById("app-x").innerHTML = appTable;
+};
