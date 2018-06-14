@@ -6,12 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel src/index.js -o dist/index.js",
-    "an": "babel src/index.js -o dist/index.js"
+    "fn": "babel src/function.js -o dist/function.js",
+    "obj": "babel src/obj.js -o dist/obj.js",
+    "m": "babel src/module.js -o dist/module.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "gulp-babel": "^7.0.1"
   }

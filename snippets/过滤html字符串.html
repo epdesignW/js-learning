@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>防止用户输入恶意内容----“标签模板”的一个重要应用，就是过滤 HTML 字符串，。</title>
+</head>
+<body>
+    <input  type="text" id="username" value="xxxxx" placeholder="请输入用户名" />
+    <button id="subBtn" type="button" onclick="toCheck()">登录</button>
+    <script>
+        window.onload = () => {
+            var mbtn = document.getElementById("username").value;
+            //alert(mbtn.value);
+            function SaferHTML(templateData) {
+            let s = templateData[0];
+            for (let i = 1; i < arguments.length; i++) {
+                let arg = String(arguments[i]);
+
+                // Escape special characters in the substitution.
+                s += arg.replace(/&/g, "&amp;")
+                        .replace(/</g, "&lt;")
+                        .replace(/>/g, "&gt;");
+
+                // Don't escape special characters in the template.
+                s += templateData[i];
+            }
+            return s;
+            let message = SaferHTML`<p>${mbtn} has sent you a message.</p>`;
+            console.log(s);
+            alert(message);
+        }
+    }
+    </script>
+</body>
+</html>

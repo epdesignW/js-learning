@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>参团判断from(web/app), IOS/Android</title>
+</head>
+
+<body>
+<!-- <button id="callAppFn">call app fn</button> -->
+<a id="call-app" href="javascript:void(0);"> Start or Download </a><br/><br/>
+
+<script type="text/javascript">
+    (function () {
+        var ua = navigator.userAgent.toLowerCase();
+        //alert(ua);
+        var t;
+        var config = {
+            scheme_IOS: 'https://itunes.apple.com/cn/app/iuiga-home-decor-design-ideas/id1238668146?l=en&mt=8',
+            scheme_Adr: 'https://play.google.com/store/apps/details?id=com.iuiga.app',
+            download_url: '',
+            timeout: 6
+        };
+        config.download_url = ua.indexOf('os') > 0 ? config.scheme_IOS : config.scheme_Adr;
+        function openclient() {
+           if(ua.indexOf('os') > 0){
+             //window.location = "";
+             alert("打开iso APP");
+           }else{
+             //window.location = 'myapp://jq.app/openwith?name=zhangsan&age=269999999'; 
+             alert("打开android APP");
+           }
+            var startTime = Date.now();
+            // var ifr = document.createElement('iframe');
+            // ifr.src = ua.indexOf('os') > 0 ? config.scheme_IOS : config.scheme_Adr;
+            // ifr.style.display = 'none';
+            // document.body.appendChild(ifr);
+            var t = setTimeout(function () {
+                var endTime = Date.now();
+                if (!startTime || endTime - startTime < config.timeout + 200) {
+                    alert('去下载');
+                    window.location = config.download_url;
+                    alert(config.download_url);
+                } else {
+
+                }
+            }, config.timeout);
+            window.onblur = function () {
+                clearTimeout(t);
+            }
+        }
+        window.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("call-app").addEventListener('click',
+                openclient, false);
+        }, false);
+    })()
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<!-- <script src="./jsBrige/gascardcar.js"></script> -->
+</body>
+</html>
