@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>语法</title>
+</head>
+
+<body style=" width: 50%; margin: 0 auto; line-height: 2.0;">
+    <h1>语法</h1>
+    <p>语法：grammar
+        <br>词法：syntax</p>
+    <p>很多时候二者是同一个意思，都是语言规则的定义</p>
+    <p>语句和表达式 statement(phrase + phrase + phrase) expression</p>
+    <ol>
+        <li>语句都有一个结果值</li>
+    </ol>
+    <div id="app">app</div>
+</body>
+<script>
+    //语句是有返回值的，大多数的返回值是undefined
+    // var a = 6;
+    // console.log( b = a);
+    // var a, b;
+    // a = eval( "if (true) { b = 4 + 38; }" );
+    // a; // 42
+
+    // function vowels(str){ //提取子母钟的元音
+    //   var matches;
+    //   if(str){
+    //       matches = str.match( /[aeiou]/g );
+    //       if(matches){
+    //           console.log(matches);
+    //           return matches;
+    //       } 
+    //   }
+    // }
+    //vowels("Hello World");
+    //合并两个if
+    // function vowels(str){
+    //     var matches;
+    //     if(str && (matches = str.match(/[aeiou]/g))){ //条件里做了一个赋值操作
+    //         console.log(matches);
+    //        return matches;
+    //     }
+    // }
+    // vowels("Hello World");
+
+    //
+    // 标签为foo的循环
+    // foo: for (var i = 0; i < 4; i++) {
+    //     for (var j = 0; j < 4; j++) {
+    //         // 如果j和i相等，继续外层循环
+    //         if (j == i) {
+    //             // 跳转到foo的下一个循环
+    //             continue foo;
+    //         }
+    //         // 跳过奇数结果
+    //         if ((j * i) % 2 == 1) {
+    //             // 继续内层循环（没有标签的）
+    //             continue;
+    //         }
+    //         console.log(i, j);
+    //     }
+    // }
+
+    //标签也能用于非循环代码块，但只有break可以，continue只能用于循环体重， 不能对不带标签的代码使用break
+    // 标签为bar的代码块
+    // function foo() { //带标签的循环 / 代码块十分少见，也不建议使用
+    //     bar: {
+    //         console.log("Hello");
+
+    //         break bar;
+    //         console.log("never runs");
+    //     }
+    //     console.log("World");
+    // }
+    // foo();
+    // Hello
+    // World
+
+    //运算优先级
+    // var a = 42;
+    // var b = "foo";
+    // var c = [1, 2, 3];
+    // var res1 = a && b || c; // ??? foo
+    // var res2 = a || b && c; // ???  42
+    // console.log(res1);
+    // console.log(res2);
+
+    // ，运算符的优先级比 = 低
+    // var a = 42, b;
+    // b = (a++ , a);
+    // console.log(a, b);
+    // c = a++ , a;
+    // console.log(a, c);
+    // //&& 运算符的优先级高于 = 
+    // if (str && (matches = str.match(/[aeiou]/g))) {
+    //     // ..
+    // }
+    //因为 && 运算符的优先级高于 || ，而 || 的优先级又高于 ? : 。
+    // var a = 42;
+    // var b = "foo";
+    // var c = false;
+    // var d = a && b || c ? c || b ? a : c && b : a;
+    // console.log(d); // ??
+    //? : 是右关联  a ? b : c ? d : e;    答案是 a ? b : (c ? d : e)
+    //另一个有关联的例子
+    // var a, b, c;
+    // a = b = c = 42;
+
+    // TDZ(temporal dead zone) 暂时性死区
+    // {
+    //     a = 2; //ReferenceError
+    //     let a;
+    // }
+    // function foo(a = 42, b = a + 1) {
+    //     console.log(a, b);
+    // }
+    // foo(); // 42 43
+    // foo(undefined); // 42 43
+    // foo(5); // 5 6
+    // foo(void 0, 7); // 42 7
+    // foo(null); // null 1
+
+    // function foo(a = 42, b = a + 1) {
+    //     console.log(
+    //         arguments.length, a, b,
+    //         arguments[0], arguments[1]
+    //     );
+    // }
+    // foo(); // 0 42 43 undefined undefined
+    // foo(10); // 1 10 11 10 undefined
+    // foo(10, undefined); // 2 10 11 10 undefined
+    // foo(10, null); // 2 10 null 10 null
+    // 虽然参数 a 和 b 都有默认值，但是函数不带参数时， arguments 数组为空
+
+
+    //ES6 参数默认值会导致 arguments 数组和相对应的命名参数之间出现偏差，ES5 也会出现这种情况：
+    // function foo(a) {
+    //     a = 42;
+    //     console.log(arguments[0]);  //在开发中不要依赖这种关联机制
+    // }
+    // foo(2); // 42 (linked)  //
+    // foo(); // undefined (not linked)
+    // //在严格模式中并没有建立关联这一说：
+    // function foo(a) {
+    //     "use strict";
+    //     a = 42;
+    //     console.log(arguments[0]);   //在开发中不要依赖这种关联机制
+    // }
+    // foo(2); // 2 (not linked)
+    // foo(); // undefined (not linked)
+
+    // function foo() {
+    //     try {
+    //         return 42; // 在finally后执行
+    //     }
+    //     finally {
+    //         console.log("Hello");
+    //     }
+    //     console.log("never runs");
+    // }
+    // console.log(foo());
+    // Hello
+    // 42
+    //try 中的 throw 也是如此
+    // function foo() {
+    //     try {
+    //         throw 42;  //执行不到
+    //     }
+    //     finally {
+    //         console.log("Hello");
+    //     }
+    //     console.log("never runs");
+    // }
+    // console.log(foo());
+    // Hello
+    // Uncaught Exception: 42
+
+    //如果finally中抛出异常，函数会在此处终止
+    // function foo() {
+    //     try {
+    //         return 42;
+    //     }
+    //     finally {
+    //         throw "Oops!";
+    //     }
+    //     console.log("never runs");
+    // }
+    // console.log(foo());
+
+    // continue 和 break 等控制语句也是如此：
+    //continue 在每次循环之后，会在 i++ 执行之前执行 console.log(i) ，所以结果是 0..9 而非1..10 。
+    // for (var i = 0; i < 10; i++) {
+    //     try {
+    //         continue;
+    //     }
+    //     finally {
+    //         console.log(i);
+    //     }
+    // }
+
+    //finally 中的 return 会覆盖 try 和 catch 中 return 的返回值：
+    // function foo() {
+    //     try {
+    //         return 42;
+    //     }
+    //     finally {
+    //         // 没有返回语句，所以没有覆盖
+    //     }
+    // }
+    // function bar() {
+    //     try {
+    //         return 42;
+    //     }
+    //     finally {
+    //         // 覆盖前面的 return 42
+    //         return;
+    //     }
+    // }
+    // function baz() {
+    //     try {
+    //         return 42;
+    //     }
+    //     finally {
+    //         // 覆盖前面的 return 42
+    //         return "Hello";
+    //     }
+    // }
+    // var res1 = foo(); // 42
+    // var res2 = bar(); // undefined
+    // var res3 = baz(); // Hello
+    // console.log(res1, res2, res3);
+
+    //switch  尽管可以使用 == ，但 switch 中 true 和 true 之间仍然是严格相等比较  === 严格相等  
+    // var a = "hello world";
+    // var b = 10;
+    // switch (true) {
+    // case (a || b == 10):
+    // // 永远执行不到这里   (a || b == 10) 的结果是 "hello world" 而非 true
+    // break;
+    // default:
+    // console.log( "Oops" );
+    // }
+    // Oops
+    // var a = 10;
+    // switch (a) {
+    //     case 1:
+    //     case 2:
+    //     // 永远执行不到这里
+    //     default:
+    //         console.log("default"); // 没有break语句，所以就执行了 3
+    //     case 3:
+    //         console.log("3");
+    //         break;
+    //     case 4:
+    //         console.log("4");
+    // }
+    // default
+    // 3
+    //小结
+    //ASI（自动分号插入）是 JavaScript 引擎的代码解析纠错机制，它会在需要的地方自动插入分号来纠正解析错误。
+     //函数参数和命名参数之间的关系非常微妙。尤其是 arguments 数组，它的抽象泄漏给我们挖了不少坑。因此，尽量不要使用 arguments 如果非用不可，也切勿同时使用 arguments和其对应的命名参数
+
+
+
+     //plus
+     //全局DOM变量  html里定义一个id为app的div
+    //  if(typeof app !== 'undefined'){
+    //     console.log("全局变量app已被定义");
+    //     console.log(app);
+    //  }
+     
+    //原生原型   
+    //一个广为人知的JavaScript的最佳时间，不要扩展原生原型
+    
+</script>
+
+</html>

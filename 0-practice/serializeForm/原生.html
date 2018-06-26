@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原生序列化表单</title>
+</head>
+
+<body>
+
+    <form method="post" action="#" id="test_form">
+        用户名：
+        <input type="text" name="username" />
+        <br> 密 &nbsp; 码：
+        <input type="password" name="password">
+        <br> 爱 &nbsp; 好：吃饭
+        <input type="checkbox" name="hobby" value="eat" checked/> 睡觉
+        <input type="checkbox" name="hobby" value="sleep" />
+        <br/> 性 &nbsp; 别：男
+        <input type="radio" value="man" name="sex" checked/> 女
+        <input type="radio" value="woman" name="sex" />
+        <br/> 学 &nbsp; 校：
+        <select name="school">
+            <option value="yangguang">阳光小学</option>
+            <option value="xiwang">希望小学</option>
+            <option value="tiantian">天天小学</option>
+        </select>
+        <br>
+        <br>
+        <br>
+        <input type="submit" value="提交" /> &nbsp;&nbsp;
+        <input type="reset" value="重置" />
+        <br>
+        <br>
+        <br>
+        <input type="button" value="点我序列化为url" id="serializeUrl" onclick="doit()" />&nbsp;&nbsp;
+        
+    </form>
+</body>
+<script>
+    // 表单序列化，IE9+
+    HTMLFormElement.prototype.serialize = function () {
+        var form = this;
+        // 表单数据
+        var arrFormData = [], objFormData = {};
+
+        [].slice.call(form.elements).forEach(function (ele) {
+            // 元素类型和状态
+            var type = ele.type, disabled = ele.disabled;
+
+            // 元素的键值
+            var name = ele.name, value = encodeURIComponent(ele.value || 'on');
+
+            // name参数必须，元素非disabled态，一些类型忽略
+            if (!name || disabled || !type || (/^reset|submit|image$/i.test(type)) || (/^checkbox|radio$/i.test(type) && !ele.checked)) {
+                return;
+            }
+
+            type = type.toLowerCase();
+
+            if (type !== 'select-multiple') {
+                if (objFormData[name]) {
+                    objFormData[name].push(value);
+                } else {
+                    objFormData[name] = [value];
+                }
+            } else {
+                [].slice.call(ele.querySelectorAll('option')).forEach(function (option) {
+                    var optionValue = encodeURIComponent(option.value || 'on');
+                    if (option.selected) {
+                        if (objFormData[name]) {
+                            objFormData[name].push(optionValue);
+                        } else {
+                            objFormData[name] = [optionValue];
+                        }
+                    }
+                });
+            }
+        });
+
+        for (var key in objFormData) {
+            arrFormData.push(key + '=' + objFormData[key].join());
+        }
+
+        return arrFormData.join('&');
+    };
+    function doit(){
+    var forms = document.getElementById("test_form").serialize();
+    console.log(forms);
+    }
+</script>
+
+</html>

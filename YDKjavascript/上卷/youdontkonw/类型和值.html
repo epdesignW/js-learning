@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>类型</title>
+</head>
+
+<body style=" width: 50%; margin: 0 auto; line-height: 2.0;">
+    <h1>javascript的数据类型</h1>
+    <p>除了Object之外，其他几种统称为基本数据类型</p>
+
+</body>
+<script>
+    // var a = null ; 
+    // console.log(typeof a === 'object');   //语言bug
+    // //我们需要使用复合条件来检测 null 值的类型：
+    // console.log(!a && typeof a === 'object');  //null是基本类型里唯一一个“假值”
+    // typeof function a(){ /* .. */ } === "function"; // true function是对象的一个子类型
+    // console.log(typeof b); ///大多数开发者倾向于将 undefined 等同于 undeclared（未声明），但在 JavaScript 中它们完全是两回事。
+    // console.log(b);  // ReferenceError: b is not defined ( undeclared（未声明）)
+    //注意： “undefined”和“is not defined
+
+    // typeof的用途    它的安全防范机制就成了我们的好帮手
+    // 这样会抛出错误
+    // if (DEBUG) {
+    //     console.log("Debugging is starting");
+    // }
+    // // 这样是安全的
+    // if (typeof DEBUG !== "undefined") {
+    //     console.log("Debugging is starting");
+    // }
+    //与 undeclared 变量不同，访问不存在的对象属性（甚至是在全局对象 window 上）不会产生ReferenceError 错误。
+
+
+    //值
+    //数组
+    //bug 小坑
+    // var a = [];
+    // a["13"] = 42;
+    // console.log(a.length);
+
+    //工具函数 slice(..) 经常被用于这类转换：  类数组转换
+    // function foo() {
+    //     var arr = Array.prototype.slice.call(arguments);
+    //     arr.push("bam");
+    //     console.log(arr);
+    // }
+    // foo("bar", "baz"); // ["bar","baz","bam"]
+
+
+    //字符串
+    //字符串是不可变的，不可变是指：字符串的成员函数不会改变其原始值，而是创建并返回一个新的字符 （成员函数）
+    // var a = "foo";
+    // var b = ["f","o","o"];
+    // // c = a.toUpperCase();
+    // // a === c; // false
+    // // a; // "foo"
+    // // c; // "FOO"
+    // console.log(a.join);  //undefined
+    // console.log(a.map);   //undefined
+    // var c = Array.prototype.join.call(a, '-');
+    // console.log(c);
+    // var d = Array.prototype.map.call(a,function(v){
+    //     return v.toUpperCase() + '.';
+    // }).join("");
+    // console.log(d);
+
+
+    //字符串反转（Javascript面试常见问题）
+    var str = 'hello world';
+    //方法一
+    // var strR ='';
+    // for(let i = str.length; i--;){
+    //     strR += str[i];
+    // }
+    // console.log(strR);
+    //方法二
+    // var arr = Array.from(str);
+    // arr.reverse();  //利用字符串的反转
+    // console.log(arr.join(''));
+    //方法三：
+    // var strR = Array.prototype.slice.call(str);
+    // console.log((strR.reverse()).join(''));
+
+
+    //数字 Number
+    // var a = 0.42;
+    // var b = .42;
+    // var a = 42.0;
+    // var b = 42.; //不常见，也不建议这样写
+
+    // var a = 3.6415926;
+    // console.log(a.toFixed(0)); //四舍五入
+    // console.log(a.toFixed(1));
+    // console.log(a.toFixed(2));
+    // console.log(a.toFixed(3));
+
+    // undefined 指从未赋值
+    // null 指曾赋过值，但是目前没有值
+    //不要这样做！
+    // function foo() {
+    //     "use strict";
+    //     var undefined = 2;
+    //     console.log(undefined); // 2
+    // }
+    // foo();
+    //永远不要重新定义 undefined 。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</html>

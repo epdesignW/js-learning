@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>类型</title>
+</head>
+
+<body style=" width: 50%; margin: 0 auto; line-height: 2.0;">
+    <h1>javascript的数据类型</h1>
+    <p>除了Object之外，其他几种统称为基本数据类型</p>
+
+</body>
+<script>
+    // var a = null ; 
+    // console.log(typeof a === 'object');   //语言bug
+    // //我们需要使用复合条件来检测 null 值的类型：
+    // console.log(!a && typeof a === 'object');  //null是基本类型里唯一一个“假值”
+    // typeof function a(){ /* .. */ } === "function"; // true function是对象的一个子类型
+    // console.log(typeof b); ///大多数开发者倾向于将 undefined 等同于 undeclared（未声明），但在 JavaScript 中它们完全是两回事。
+    // console.log(b);  // ReferenceError: b is not defined ( undeclared（未声明）)
+    //注意： “undefined”和“is not defined
+
+    // typeof的用途    它的安全防范机制就成了我们的好帮手
+    // 这样会抛出错误
+    // if (DEBUG) {
+    //     console.log("Debugging is starting");
+    // }
+    // // 这样是安全的
+    // if (typeof DEBUG !== "undefined") {
+    //     console.log("Debugging is starting");
+    // }
+    //与 undeclared 变量不同，访问不存在的对象属性（甚至是在全局对象 window 上）不会产生ReferenceError 错误。
+
+
+    //值
+    //数组
+    //bug 小坑
+    // var a = [];
+    // a["13"] = 42;
+    // console.log(a.length);
+
+    //工具函数 slice(..) 经常被用于这类转换：  类数组转换
+    // function foo() {
+    //     var arr = Array.prototype.slice.call(arguments);
+    //     arr.push("bam");
+    //     console.log(arr);
+    // }
+    // foo("bar", "baz"); // ["bar","baz","bam"]
+
+
+    //字符串
+    //字符串是不可变的，不可变是指：字符串的成员函数不会改变其原始值，而是创建并返回一个新的字符 （成员函数）
+    // var a = "foo";
+    // var b = ["f","o","o"];
+    // // c = a.toUpperCase();
+    // // a === c; // false
+    // // a; // "foo"
+    // // c; // "FOO"
+    // console.log(a.join);  //undefined
+    // console.log(a.map);   //undefined
+    // var c = Array.prototype.join.call(a, '-');
+    // console.log(c);
+    // var d = Array.prototype.map.call(a,function(v){
+    //     return v.toUpperCase() + '.';
+    // }).join("");
+    // console.log(d);
+
+
+    //字符串反转（Javascript面试常见问题）
+    //var str = 'hello world';
+    //方法一
+    // var strR ='';
+    // for(let i = str.length; i--;){
+    //     strR += str[i];
+    // }
+    // console.log(strR);
+    //方法二
+    // var arr = Array.from(str);
+    // arr.reverse();  //利用字符串的反转
+    // console.log(arr.join(''));
+    //方法三：
+    // var strR = Array.prototype.slice.call(str);
+    // console.log((strR.reverse()).join(''));
+
+
+    //数字 Number
+    // var a = 0.42;
+    // var b = .42;
+    // var a = 42.0;
+    // var b = 42.; //不常见，也不建议这样写
+
+    // var a = 3.6415926;
+    // console.log(a.toFixed(0)); //四舍五入
+    // console.log(a.toFixed(1));
+    // console.log(a.toFixed(2));
+    // console.log(a.toFixed(3));
+
+    // undefined 指从未赋值
+    // null 指曾赋过值，但是目前没有值
+    //不要这样做！
+    // function foo() {
+    //     "use strict";
+    //     var undefined = 2;
+    //     console.log(undefined); // 2
+    // }
+    // foo();
+    //永远不要重新定义 undefined 。
+
+    //temt 数组求和
+    // var fee = [328, 328, 238, 120, 79, 142, 446, 498, 302, 13.8, 128, 240, 95, 92];
+    // var total = 0;
+    //方法一
+    // for(let i=0; i<fee.length; i++){
+    //    total += fee[i];
+    // }
+    //方法二
+    // fee.forEach(function(item,index){
+    //     total += item;
+    // });
+    //方法三：
+    // for(let item of fee.values()){
+    //      total += item;
+    // }
+    //console.log("total：",total);
+
+
+    //值和引用
+    //1.JavaScript 中没有指针，引用的工作机制也不尽相同。在 JavaScript 中变量不可能成为指向另一个变量的引用。
+    //2. JavaScript 引用指向的是值。如果一个值有 10 个引用，这些引用指向的都是同一个值，它们相互之间没有引用 / 指向关系。 
+    //JavaScript 对值和引用的赋值 / 传递在语法上没有区别，完全根据值的类型来决定。
+    // var a = 2;
+    // var b = a; // b是a的值的一个副本
+    // b++;
+    // a; // 2
+    // b; // 3
+    // var c = [1, 2, 3];
+    // var d = c; // d是[1,2,3]的一个引用， c、d同事指向 [1,2,3]
+    // d.push(4);
+    // c; // [1,2,3,4]
+    // d; // [1,2,3,4]
+    //简单值（即标量基本类型值，scalar primitive）总是通过值复制的方式来赋值 / 传递，包括null 、 undefined 、字符串、数字、布尔和 ES6 中的 symbol 。
+    //复合值（compound value）——对象（包括数组和封装对象，参见第 3 章）和函数，则总是是通过引用复制的方式来赋值 / 传递。
+
+    //由于引用指向的是值本身而非变量，所以一个引用无法更改另一个引用的指向。
+    // var a = [1,2,3];
+    // var b = a;
+    // console.log(a);
+    // console.log(b);
+    // //then
+    // b = [4,5,6];
+    // console.log(a);
+    // console.log(b);
+
+    //函数参数
+    // function foo(x) { //实际是将引用 a 的一个复本赋值给 x （引用赋值）
+    //     x.push(4);
+    //     console.log(x);
+    //     console.log("a",a);  //引用复制，x和a指向同一个值
+    //     //then
+    //     x = [4, 5, 6];
+    //     x.push(7);
+    //     console.log(x);
+    // }
+    // var a = [1, 2, 3];
+    // foo(a);
+    // console.log(a);
+    //如果要将 a 的值变为 [4,5,6,7] ，必须更改 x 指向的数组，而不是为 x 赋值一个新的数组。
+    // function foo(x) {
+    //     x.push(4);
+    //     console.log(x); // [1,2,3,4]
+    //     // 然后
+    //     x.length = 0; // 清空数组
+    //     x.push(4, 5, 6, 7);
+    //     console.log(x); // [4,5,6,7]
+    // }
+    // var a = [1, 2, 3];
+    // foo(a);
+    // console.log(a); // 是[4,5,6,7]，不是[1,2,3,4]
+    //请记住：我们无法自行决定使用值复制还是引用复制，一切由值的类型来决定。
+
+    //如果通过值赋值的方式来传递复合值（如数组），就需要为其创建一个副本，这样传递就不再是原始值
+    // function foo(x) {
+    //     x.push(4);
+    //     console.log(x); // [1,2,3,4]
+    //     console.log(a);
+    //     // 然后
+    //     x = [4, 5, 6];
+    //     x.push(7);
+    //     x; // [4,5,6,7]
+    // }
+    // var a = [1, 2, 3];
+    // foo(a.slice()); // 通过 arr.slice()浅复制  （本）
+    // console.log(a); 
+
+    //相反，如果要将标量基本类型值传递到函数内并进行更改，就需要将该值封装到一个复合值（对象、数组等）中，然后通过引用复制的方式传递。
+    // function foo(wrapper) {
+    //     wrapper.a = 42;
+    // }
+    // var obj = {
+    //     a: 2
+    // };
+    // foo(obj);
+    // console.log(obj.a); // 42
+
+
+    //仅了解
+    //与预期不同的是，虽然传递的是指向数字对象的引用复本，但我们并不能通过它来更改其中的基本类型值：
+    // function foo(x) {
+    //     x = x + 1;
+    //     x; // 3
+    // }
+    // var a = 2;
+    // var b = new Number(a); // Object(a)也一样
+    // foo(b);
+    // console.log(b); // 是2，不是3
+    // 原因： 基本类型值是不可更改的（字符串和布尔也是如此）。如果一个数字对象的标量基本类型值是2，那么该值就不能更改，除非创建一个包含新值的数字对象
+
+    // ==  和  ===  宽松相等和严格相等
+    // == 允许在相等比较重进行强制类型转换， 而 === 不允许
+    // 不要这样用，条件判断不成立：
+    // if (a == true) {
+    //     // ..
+    // }
+    // // 也不要这样用，条件判断不成立：
+    // if (a === true) {
+    //     // ..
+    // }
+    // // 这样的显式用法没问题：
+    // if (a) {
+    //     // ..
+    // }
+    // // 这样的显式用法更好：
+    // if (!!a) {
+    //     // ..
+    // }
+    // // 这样的显式用法也很好：
+    // if (Boolean(a)) {
+    //     // ..
+    // }
+    //避免了 == true 和 == false （也叫作布尔值的宽松相等）之后我们就不用担心这些坑了
+    //这时最好用 === 来避免不经意的强制类型转换。这两个原则可以让我们避开几乎所有强制类型转换的坑。
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</html>

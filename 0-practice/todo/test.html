@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>todo练习</title>
+    <link rel="stylesheet" href="index.css">  
+</head>
+<body>
+    <!--
+     1. 添加todo，通过enter和按钮添加
+     2. 点击改变状态，实时更改dom 
+     3. 删除
+     4. 点击编辑 
+    -->
+    <header>
+        <section>
+            <form action="javascript:postaction()" id="form">
+                <label for="title">ToDoList</label>
+                <input type="text" id="title" name="title" placeholder="添加ToDo" required="required" autocomplete="off" />
+            </form>
+        </section>
+    </header>
+    <section>
+        <h2 onclick="save()">正在进行 <span id="todocount"></span></h2>
+        <ol id="todolist" class="demo-box">
+        </ol>
+        <h2>已经完成 <span id="donecount"></span></h2>
+        <ul id="donelist">
+        </ul>
+    </section>
+    <footer>
+        Copyright &copy; 2018 test.cn <a href="javascript:clear();">clear</a>
+    </footer>
+    <script type="text/javascript" src="todo.js"></script>
+</body>
+</html>

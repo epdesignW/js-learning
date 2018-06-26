@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>异步和性能</title>
+    <style>
+        html {
+            font-size: 12px;
+        }
+
+        @media screen and (min-width: 375px) {
+            html {
+                /* iPhone6的375px尺寸作为16px基准，414px正好18px大小, 600 20px */
+                font-size: calc(100% + 2 * (100vw - 375px) / 39);
+                font-size: calc(16px + 2 * (100vw - 375px) / 39);
+            }
+        }
+
+        @media screen and (min-width: 414px) {
+            html {
+                /* 414px-1000px每100像素宽字体增加1px(18px-22px) */
+                font-size: calc(112.5% + 4 * (100vw - 414px) / 586);
+                font-size: calc(18px + 4 * (100vw - 414px) / 586);
+            }
+        }
+
+        @media screen and (min-width: 600px) {
+            html {
+                /* 600px-1000px每100像素宽字体增加1px(20px-24px) */
+                font-size: calc(125% + 4 * (100vw - 600px) / 400);
+                font-size: calc(20px + 4 * (100vw - 600px) / 400);
+            }
+        }
+
+        @media screen and (min-width: 1000px) {
+            html {
+                /* 1000px往后是每100像素0.5px增加 */
+                font-size: calc(137.5% + 6 * (100vw - 1000px) / 1000);
+                font-size: calc(22px + 6 * (100vw - 1000px) / 1000);
+            }
+        }
+    </style>
+</head>
+
+<body style=" width: 96%; margin: 0 auto; line-height: 2.0;">
+    <h1>异步和性能</h1>
+    <p>回调是异步编程的基础</p>
+    <p>Promise</p>
+    <p>生成器</p>
+    <hr>
+    <p>现在和将来之间有段间隙，在这段间隙中，程序没有活跃执行</p>
+    <p>管理这段时间间隙（间隙时间可能在等待用户输入、从数据库或者文件系统请求数据、通过网络发送数据并等待响应、或者间隔执行再重复任务）</p>
+    <p>事实上，程序中现在运行的部分和将来运行的部分之间的关系就是异步编程的核心</p>
+    <p>学习目标：完整和具体的认识</p>
+    <p>JavaScript 引擎本身并没有时间的概念，只是一个按需执行 JavaScript 任意代码片段的环境。“事件”（JavaScript 代码执行）调度总是由包含它的环境进行。</p>
+    <p> ES6 中 Promise 的引入，因为这项技术要求对事件循环队列的调度运行能够直接进行精细控制</p>
+
+</body>
+<script>
+    //ajax异步请求数据
+    // ajax(..)是某个库中提供的某个Ajax函数
+    // var data = ajax("http://some.url.1");
+    // console.log(data);
+    // 啊哦！data通常不会包含Ajax结果
+    //可能你已经听说过，可以发送同步 Ajax 请求。尽管技术上说是这样，但是，在任何情况下都不应该使用这种方式，因为它会锁定浏览器 UI（按钮、菜单、滚动条等），并阻塞所有的用户交互。这是一个可怕的想法，一定要避免。
+
+    // ajax(..)是某个库中提供的某个Ajax函数
+    // ajax("http://some.url.1", function myCallbackFunction(data) {
+    //     console.log(data); // 耶！这里得到了一些数据！
+    // });
+    // function now() {
+    //     return 21;
+    // }
+    // function later() {
+    //     answer = answer * 2;
+    //     console.log("Meaning of life:", answer);
+    // }
+    // var answer = now();
+    // setTimeout(later, 5000); // Meaning of life: 42
+    // doA(function () {
+    //     doB();
+    //     doC(function () {
+    //         doD();
+    //     })
+    //     doE();
+    // });
+    // doF();
+    // doA()
+    // doF()
+    // doB()
+    // doC()
+    // doE()
+    // doD()
+
+    //五个回调故事 
+    //1. 当用户点击“确定”就可以购买电视时，你需要调用（假设由某个分析追踪公司提供的）第三方函数以便跟踪这个交易
+    // analytics.trackPurchase(purchaseData, function () {
+    //     chargeCreditCard();  //支付了五次（第三方提供）
+    //     displayThankyouPage();
+    // });
+    // //改进方案
+    // var tracked = false;
+    // analytics.trackPurchase(purchaseData, function () {
+    //     if (!tracked) {
+    //         tracked = true;
+    //         chargeCreditCard();
+    //         displayThankyouPage();
+    //     }
+    // });
+    //     但是，后来有一个 QA 工程师问道：“如果他们根本不调用这个回调怎么办？”哎呦！之
+    // 前你们双方都没有想到这一点。
+    // 然后，你开始沿着这个兔子洞深挖下去，考虑着他们调用你的回调时所有可能的出错情
+    // 况。这里粗略列出了你能想到的分析工具可能出错的情况：
+    // • 调用回调过早（在追踪之前）；
+    // • 调用回调过晚（或没有调用）；
+    // • 调用回调的次数太少或太多（就像你遇到过的问题！）；
+    // • 没有把所需的环境 / 参数成功传给你的回调函数；
+    // • 吞掉可能出现的错误或异常；
+    // • ……
+    // 这感觉就像是一个麻烦列表，实际上它就是。你可能已经开始慢慢意识到，对于被传给你
+    // 无法信任的工具的每个回调，你都将不得不创建大量的混乱逻辑。
+    // 现在你应该更加明白回调地狱是多像地狱了吧。
+    //回调最大的问题是控制反转，它会导致信任链的完全断裂。############## 缺乏顺序性和可信任性
+
+
+    //Promise 首先想要解决的是控制反转问题，其中，信任很脆弱，也很容易失去。
+
+</script>
+
+</html>

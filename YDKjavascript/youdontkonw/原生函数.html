@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原生函数（内建函数）</title>
+</head>
+
+<body style=" width: 50%; margin: 0 auto; line-height: 2.0;">
+    <h1>原生函数</h1>
+    <p>String()、 Number()、Boolean() Array() Object() Function() RegExp() Date() Error() Symbol()</p>
+</body>
+<script>
+    // var a = new String("abc");
+    // console.log( typeof a); // 是"object"，不是"String"
+    // console.log(a instanceof String); // true
+    // console.log(Object.prototype.toString.call(a)); // "[object String]"
+    //再次强调， new String("abc") 创建的是字符串 "abc" 的封装对象，而非基本类型值 "abc" 
+
+    //通过 Object.prototype.toString(..) 来查看, 内部属性[[Class]],可看作内部分类
+    // var class1 = Object.prototype.toString.call([1, 2, 3, 4]);
+    // console.log(class1);
+    // var class2 = Object.prototype.toString.call(/regex-literal/i);
+    // console.log(class2);
+    // Object.prototype.toString.call("abc"); // "[object String]"
+    // Object.prototype.toString.call(42); // "[object Number]"
+    // Object.prototype.toString.call(true); // "[object Boolean]"
+
+    //封装对象的 拆封
+    // var a = new String('abc');
+    // console.log(a.valueOf());
+    // var num = new Number(42);
+    // console.log(num.valueOf());
+    // var b = new Boolean(false);
+    // console.log(b.valueOf());
+
+    //原生函数作为构造函数
+    //我们将包含至少一个“空单元”的数组称为“稀疏数组”。
+    //Array 构造函数只带一个数字参数的时候，该参数会被作为数组的预设长度（length），而非只充当数组中的一个元素。
+    //  var a = new Array(3);
+    //  console.log(a);
+    //  console.log(a.length);
+
+    //Object Function  RegExp慎用
+
+    //Date() 和 Error()用处要大很多，因为没有对应的常量形式来作为它们的替代
+    // 1970 年 1 月 1 日开始计算
+    // console.log(Date.now);
+    // if(!Date.now){
+    //     Date.now = function(){
+    //         return (new Date()).getTime();
+    //     }
+    // }
+
+    //Error
+    // function foo(x){
+    //     if(!x){
+    //        throw new Error("x wasn't provided");
+    //     }
+    // }
+
+
+    //类型转换
+    //JSON 字符串化
+    //工具函数 JSON.stringify(..) 在将 JSON 对象序列化为字符串时也用到了 ToString
+    //字符串和数字之间的显式转换
+    // var a = 2;
+    // var b = String( a );
+    // console.log( typeof b );
+    // var c = "3.14";
+    // var d = Number( c );
+    // b; // "42"
+    // d; // 3.14
+    // var a = 42;
+    // var b = a.toString();
+    // var c = "3.14";
+    // var d = +c;
+    // b; // "42"
+    // d; // 3.14
+
+    //日期
+    // var d = new Date( "Mon, 18 Aug 2014 08:53:06 CDT" );
+    // console.log(d);
+    // console.log(+d);
+    //获取时间戳的方法
+    // var timestamp = +new Date();
+    // console.log(timestamp);
+    // var timestamp2 = new Date().getTime();
+    // console.log(timestamp2);
+    // var timestamp3 = Date.now();
+    // console.log(timestamp3);
+    // if (!Date.now) {
+    //     Date.now = function () {
+    //         return +new Date();
+    //     };
+    // }
+
+    //indexOf() JavaScript 中字符串的 indexOf(..) 方法也遵循这一惯例，该方法在字符串中搜索指定的子字符串，如果找到就返回子字符串所在的位置（从 0 开始），否则返回 -1 。
+    // var a = "Hello World";
+    // if (a.indexOf("lo") >= 0) { // true
+    //     // 找到匹配！
+    // }
+    // if (a.indexOf("lo") != -1) { // true
+    //     // 找到匹配！
+    // }
+    // if (a.indexOf("ol") < 0) { // true
+    //     // 没有找到匹配！
+    // }
+    // if (a.indexOf("ol") == -1) { // true
+    //     // 没有找到匹配！
+    // }
+
+    //显式解析数字字符串
+    // var a = '42';
+    // var b = '42px';
+    // console.log(Number( a ));
+    // console.log(parseInt(a));
+    // console.log(Number(b));
+    // console.log(parseInt(b));
+
+    //将第二个参数设置为 10 ，即可避免这个问题：
+    // var hour = parseInt( selectedHour.value, 10 );
+    // var minute = parseInt( selectedMiniute.value, 10 );
+
+    // //显示转换为布尔值
+    // var a = "0"; //true
+    // var b = [];
+    // var c = {};
+
+    // var d = "";  //false 
+    // var e = 0;
+    // var f = null;
+    // var g;
+
+    // Boolean( a );
+
+    // var a = 42;
+    // var b = "abc";
+    // var c = null;
+    // a || b; // 42
+    // a && b; // "abc"
+    // c || b; // "abc"
+    // c && b; // null
+
+    // function foo(a, b) {
+    //     a = a || "hello";
+    //     b = b || "world";
+    //     console.log(a + " " + b);
+    // }
+    // foo(); // "hello world"
+    // foo("yeah", "yeah!"); // "yeah yeah!"
+
+    //es6给默认值
+    // function foo(a="hello", b="world") {
+    //     console.log(a + " " + b);
+    // }
+    // foo(); // "hello world"
+    // foo("yeah", "yeah!"); // "yeah yeah!"
+
+    //隐式强制转换
+    // var a = 42;
+    // var b = null;
+    // var c = "foo";
+    // if (a && (b || c)) {  // a && (b || c) -> foo,  foo强制转换为true
+    //     console.log("yep");
+    // }
+
+    
+
+
+</script>
+
+</html>

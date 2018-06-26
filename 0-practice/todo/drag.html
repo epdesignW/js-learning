@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>拖拽操作</title>
+    <style type="text/css">
+        .drag {
+            width: 100px;
+            height: 30px;
+            border: 1px solid #d1d1d1;
+            background-color: coral;
+            position: relative;
+            cursor: move;
+            -webkit-user-drag: element;
+            display: block;
+        }
+
+        #drag1 {
+            background-color: cornflowerblue;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li id="drag1" class="drag" draggable="true"></li>
+        <li id="drag2" class="drag" draggable="true"></li>
+    </ul>
+    <script>
+        function load() {
+            var lis=document.querySelectorAll('ul li');
+            [].forEach.call(lis, function(li) {
+                li.addEventListener('dragstart', handleDragStart, false);
+                li.addEventListener('dragover', handleDragOver, false);
+                li.addEventListener('drop', handleDrop, false);
+                onmouseout =function(){
+                    console.log("落座");
+                };
+            });	
+        }
+        window.onload = load;
+        window.addEventListener("storage",load,false);
+         //响应拖拽
+         var dragSrcEl = null;
+            function handleDragStart(e) {
+                console.log("handleDragStart");
+                dragSrcEl = this;
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/html', this.innerHTML);
+            }
+            function handleDragOver(e) {
+                console.log("handleDragOver");
+                if (e.preventDefault) {
+                    e.preventDefault();
+                }
+                e.dataTransfer.dropEffect = 'move';
+                return false;
+            }
+            function handleDrop(e) {
+                console.log("handleDrop");
+                if (e.stopPropagation) {
+                    e.stopPropagation();
+                }
+                if (dragSrcEl != this) {
+                    dragSrcEl.innerHTML = this.innerHTML;
+                    this.innerHTML = e.dataTransfer.getData('text/html');
+                }
+                return false;
+            }
+    </script>
+</body>
+
+</html>

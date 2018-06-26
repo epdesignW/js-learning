@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>this</title>
+</head>
+
+<body>
+    <h1>this的误解</h1>
+    <script>
+        // function foo(num) {
+        //     console.log("foo: " + num);
+        //     //记录foo被调用的次数
+        //     this.count++;  //window.count++;
+        //     console.log(this.count);
+        // }
+        // foo.count = 0;
+        // var i;
+        // for(i=0; i<10; i++) {
+        //     if(i>5){
+        //         foo(i);
+        //     }
+        // }
+        // console.log(foo.count);  // 0 
+
+        //替补方法
+        /*从某种角度来说这个方法确实“解决”了问题，但可惜它忽略了真正的问题——无法理解
+          this 的含义和工作原理——而是返回舒适区，使用了一种更熟悉的技术：词法作用域。
+        */
+        // function foo(num) {
+        //     console.log("foo: " + num);
+        //     //记录foo被调用的次数
+        //     data.count++; 
+        // }
+        // var data = {  count: 0};
+        // var i;
+        // for(i=0; i<10; i++) {
+        //     if(i>5){
+        //         foo(i);
+        //     }
+        // }
+        // console.log(data.count);  // 0 
+
+        //如果要从函数对象内部引用它自身，那只使用 this 是不够的。一般来说你需要通过一个指向函数对象的词法标识符（变量）来引用它。
+        //完全依赖变量foo的词法作用域
+        // function foo(num) {
+        //     console.log("foo: " + num);
+        //     //记录foo被调用的次数
+        //     foo.count++;  //通过函数名引用自身
+        // }
+        // foo.count = 0;
+        // var i;
+        // for (i = 0; i < 10; i++) {
+        //     if (i > 6) {
+        //         foo(i);
+        //     }
+        // }
+        // console.log(foo.count);  // 0 
+
+        //坚持用this的解决方案
+        // function foo(num) {
+        //     console.log("foo: " + num);
+        //     //记录foo被调用的次数
+        //     this.count++;  
+        // }
+        // foo.count = 0;
+        // var i;
+        // for (i = 0; i < 10; i++) {
+        //     if (i > 3) {
+        //         foo.call(foo, i);
+        //        // foo.apply(foo, [i]);
+        //        // foo.bind(foo, i)(); //通过call, apply ,bind(立即执行)
+        //     }
+        // }
+        // console.log(foo.count);  // 0 
+
+        //第二个误区, this在任何情况下都不指向函数的词法作用域，
+        //每当你想把this和词法作用域的查找混合使用时，一定要提醒自己，这是无法实现的
+        // function foo() {
+        //     var a = 2;
+        //     this.bar();  //调取不成功，省去前面的this
+        // }
+        // function bar() {
+        //     console.log(this.a);
+        // }
+        // foo(); // ReferenceError: a is not defined
+        // function baz() {
+        //     // 当前调用栈是：baz
+        //     // 因此，当前调用位置是全局作用域
+        //     console.log("baz");
+        //     bar(); // <-- bar 的调用位置
+        // }
+        // function bar() {
+        //     //this 全面解析 ｜ 83
+        //     // 当前调用栈是 baz -> bar
+        //     // 因此，当前调用位置在 baz 中
+        //     console.log("bar");
+        //     foo(); // <-- foo 的调用位置
+        // }
+        // function foo() {
+        //     // 当前调用栈是 baz -> bar -> foo
+        //     // 因此，当前调用位置在 bar 中
+        //     debugger; //通过 baz -> bar -> foo，查看调用链，容易出错，
+        //     console.log("foo");
+        // }
+        // baz(); // <-- baz 的调用位置
+
+        //隐式绑定
+        // function foo() {
+        // console.log( this.a );
+        // }
+        // var obj = {
+        // a: 2,
+        // foo: foo
+        // };
+        // obj.foo(); // 2
+        //隐式绑定（ 多级调用 obj1.obj2.foo() ）
+        // function foo() {
+        //     console.log(this.a);
+        // }
+        // var obj2 = {
+        //     a: 42,
+        //     foo: foo
+        // };
+        // var obj1 = {
+        //     a: 2,
+        //     obj2: obj2
+        // };
+        // obj1.obj2.foo(); // 42
+
+        //隐式丢失
+        // function foo(){
+        //     console.log(this.a);
+        // }
+        // var obj = {
+        //     a:2,
+        //     foo: foo
+        // };
+        // var bar = obj.foo; // 函数别名!
+        // // bar 是 obj.foo 的一个引用，但是实际上，它引用的是 foo 函数本身
+        // var a = "oops, global";  //a 是全局对象的属性
+        // bar(); // "oops, global"
+        //隐式丢失 例子2
+        //一种更微妙、更常见并且更出乎意料的情况发生在传入***回调函数***时：
+        // function foo() {
+        //     console.log(this.a);
+        // }
+        // function doFoo(fn) {
+        //     // fn 其实引用的是 foo
+        //     fn(); // <-- 调用位置！
+        // }
+        // var obj = {
+        //     a: 2,
+        //     foo: foo
+        // };
+        // var a = "oops, global"; // a 是全局对象的属性
+        // doFoo(obj.foo); // "oops, global"
+        //隐式丢失  例子3 把函数传入语言内置的函数而不是传入你自己声明的函数
+        // function foo() {
+        //     console.log(this.a);
+        // }
+        // var obj = {
+        //     a: 2,
+        //     foo: foo
+        // };
+        // var a = "oops, global"; // a 是全局对象的属性
+        // setTimeout(obj.foo, 100); // "oops, global"
+        //JavaScript 环境中内置的 setTimeout() 函数实现和下面的伪代码类似：
+        // function setTimeout(fn, delay) {
+        //     // 等待 delay 毫秒
+        //     fn(); // <-- 调用位置！
+        // }
+
+        //显示绑定
+        //1. 显式强制绑定（硬绑定）
+        // function foo() {
+        // console.log( this.a );
+        // }
+        // var obj = {
+        // a:2
+        // };
+        // var bar = function() {
+        // foo.call( obj );
+        // };
+        // bar(); // 2
+        // setTimeout( bar, 100 ); // 2
+        // // 硬绑定的 bar 不可能再修改它的 this
+        // bar.call( window ); // 2
+
+        //绑定例外 apply(null,[2, 3])
+        //绑定空对象
+        // function foo(a,b){
+        //     console.log("a:" + a + ",b: " + b);
+        // }
+        // //我们的空对象
+        // var kong = Object.create(null);
+        // //把数组展开成参数
+        // foo.apply(kong, [2,3]);   // 比null更空
+        // //使用bind(..)进行柯里化
+        // var bar = foo.bind(kong, 2);
+        // bar(3);
+
+        //间接引用
+        // function foo(){
+        //     console.log(this.a);
+        // }
+        // var a = 2;
+        // var o = {
+        //    a:3,
+        //    foo:foo
+        // };
+        // var p = {a:4};
+        // o.foo(); 
+        // (p.foo = o.foo)(); // 2    (p.foo = o.foo)的返回值是目标函数的引用，所以此调用位置是foo() 而不是p.foo()或者 o.foo()
+
+
+        //this的词法 （es6箭头函数的this）
+        // function foo(){
+        //     return (a) => { //this继承自foo
+        //         console.log(this.a);
+        //     }
+        // }
+        // var obj1 = { a:2 };
+        // var obj2 = { a:3 };
+        // var bar = foo.call(obj1);
+        // bar.call(obj2);  //2
+        //foo内部创建的箭头函数会铺货调用时foo()的this, 箭头函数的绑定无法修改（new也不行）
+        //箭头函数的用法
+        // function foo(){
+        //     setTimeout(()=>{
+        //       //这里的this继承自 foo
+        //       console.log(this);
+        //     },100);
+        // }
+        // var obj = { a:2 };
+        // foo.call( obj );  // 2
+
+        // 我之前常用的 （词法作用域取代了传统的this机制）
+        function foo() {
+            var self = this; // lexical capture of this
+            setTimeout(function () {
+                console.log(self.a);
+            }, 100);
+        }
+        var obj = {
+            a: 2
+        };
+        foo.call(obj); // 2
+
+
+        //小练习，容易犯错，按照this的四种绑定规则 + 绑定例外 + 箭头函数 + 软绑定（原则：如果不知道就打印出来， console.log(this)）
+        // function foo() {
+        //     var a = 2;
+        //     function bar() {
+        //         console.log(this.a); //this还是window
+        //         console.log(a);
+        //         // console.log(this);
+        //     }
+        //     bar.call(foo);
+        //     setTimeout(function () { //是回调函数，回调函数和foo是一个级别的
+        //         //debugger;
+        //         //console.log(this);
+        //         //console.log(this.a); //这个时候的this是window
+        //     });
+        // }
+        // foo.call(foo);
+
+
+
+
+
+    </script>
+</body>
+
+</html>

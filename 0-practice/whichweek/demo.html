@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>根据开始日期判断是第几周</title>
+    <style>
+        .week {
+            height: 200px;
+            width: 300px;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="week1" class="week">
+        week1
+    </div>
+    <div id="week2" class="week">
+        week2
+    </div>
+    <div id="week3" class="week">
+        week3
+    </div>
+    <div id="week4" class="week">
+        week4
+    </div>
+    <div id="week5" class="week">
+        week5
+    </div>
+    <div id="week6" class="week">
+        week6
+    </div>
+</body>
+<script>
+    // 假定2018-06-18
+    var now = new Date().getTime();  //当前日期时间戳
+    var startDay = new Date("2018-06-16");   //开始日期
+    var startstamp = startDay.getTime();   //开始日期时间戳
+    var whichWeek = 0;
+    //一周的时间(毫秒)
+    var weekTime = 7 * 24 * 60 * 60 * 1000;  //一周时间单位
+    whichWeek = Math.ceil((now - startstamp) / weekTime);
+    console.log(whichWeek);
+    if (whichWeek) {
+        document.getElementById("week" + whichWeek).style.display = "block";
+    }else{
+        alert('活动还未开始');
+    }
+    
+</script>
+</html>

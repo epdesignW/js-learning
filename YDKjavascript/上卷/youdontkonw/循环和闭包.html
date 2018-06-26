@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>循环和闭包</h1>
+    <script>
+        // (function dayin() { //因此实际上只有一个 i
+        //     for (var i = 1; i <= 5; i++) {
+        //         setTimeout(function timer() { //延迟函数的回调会在循环结束时才执行
+        //             console.log(i);
+        //         }, i * 1000);
+        //     }
+        // })();
+        //改进
+        // for (var i=1; i<=5; i++) {
+        //     (function() {
+        //     setTimeout( function timer() {
+        //     console.log( i );
+        //     }, i*1000 );
+        //     })();
+        // }
+        // for (var i=1; i<=5; i++) {
+        //     (function() {
+        //     setTimeout( function timer() {
+        //     console.log( i );
+        //     }, i*1000 );
+        //     })();
+        // }
+        //虽然有自己的作用域了，但是作用域内是空的，实际i引用还是上层的i
+        //  for (var i=1; i<=5; i++) {
+        //     (function() {
+        //         var j = i;  // 技巧，相反的，如果我们想用外层的变量引用，可以同理想办法，vue的this
+        //         setTimeout( function timer() {
+        //         console.log( j );
+        //         }, j*1000 );
+        //     })();
+        // }
+        //块作用域和闭包联手便可天下无敌
+        for (let i=1; i<=5; i++) {
+            setTimeout( function timer() {
+            console.log( i );
+            }, i*1000 );
+        }
+
+    </script>
+</body>
+
+</html>

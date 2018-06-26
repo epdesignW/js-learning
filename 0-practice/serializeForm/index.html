@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone = no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>表单序列化</title>
+</head>
+
+<body>
+    <form method="post" action="#" id="test_form">
+        用户名：
+        <input type="text" name="username" />
+        <br> 密 &nbsp; 码：
+        <input type="password" name="password">
+        <br> 爱 &nbsp; 好：吃饭
+        <input type="checkbox" name="hobby" value="eat" checked/> 睡觉
+        <input type="checkbox" name="hobby" value="sleep" />
+        <br/> 性 &nbsp; 别：男
+        <input type="radio" value="man" name="sex" checked/> 女
+        <input type="radio" value="woman" name="sex" />
+        <br/> 学 &nbsp; 校：
+        <select name="school">
+            <option value="yangguang">阳光小学</option>
+            <option value="xiwang">希望小学</option>
+            <option value="tiantian">天天小学</option>
+        </select>
+        <br>
+        <br>
+        <br>
+        <input type="submit" value="提交" /> &nbsp;&nbsp;
+        <input type="reset" value="重置" />
+        <br>
+        <br>
+        <br>
+        <input type="button" value="点我序列化为url" id="serializeUrl" />&nbsp;&nbsp;
+        <input type="button" value="点我序列化为json" id="serializeJson" />
+    </form>
+
+    <script src="js/jquery.min.js"></script>
+    <script>
+        /*
+        serialize()
+        作用：序列表单内容为字符串。
+        参数： 无
+        返回值：表单内容的字符串格式
+        */
+        $(function () {
+            $("#serializeUrl").click(function () {
+                testJquerySerializeUrl();
+            });
+        });
+
+        function testJquerySerializeUrl() {
+            var serializeUrl = $("#test_form").serialize();
+            alert("序列化为url格式为：" + serializeUrl);
+        }
+
+
+        /*
+        serializeArray()方法
+        1.作用：序列化表格元素 (类似 '.serialize()' 方法) 返回 JSON 数据结构数据。
+        2.参数：无
+        3.返回值：返回的是JSON对象而非JSON字符串
+        4.返回格式为：
+           [ 
+             {name: 'firstname', value: 'Hello'}, 
+             {name: 'lastname', value: 'World'},
+             {name: 'alias'}, // this one was empty
+          ]
+        */
+        $(function () {
+            $("#serializeUrl").click({ "name": "zxy" }, function () {
+                testJquerySerializeUrl();
+                // alert();
+            });
+
+            $("#serializeJson").click({}, function () {
+                testJquerySerializeJson();
+            });
+
+        });
+
+        function testJquerySerializeJson() {
+            var serializeJson = $("#test_form").serializeArray();
+            alert("序列化为json格式为：" + JSON.stringify(serializeJson)); //JSON.stringify(json对象) 将json对象转化为json字符串
+
+        }
+    </script>
+</body>
+
+</html>

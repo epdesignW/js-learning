@@ -320,43 +320,43 @@
 
 //Promise对象的使用
 //以做饭吃完洗完为例说明
-// let state = 1;
-// function step1(resolve,reject){ //这里当然你也可以改成其它名字，反正是形参嘛。不过这两个名称已经是约定俗成，最好不要改。
-//     console.log("1.开始洗菜");
-//     if(state==1){
-//        resolve("菜洗好了");
-//     }else{
-//        reject("还没洗菜啊");
-//     }
-// }
-// function step2(resolve,reject){
-//     console.log("2.坐下来吃饭");
-//     if(state==2){
-//        resolve("吃好了");
-//     }else{
-//        reject("坐下来吃饭出错");
-//     }
-// }
-// function step3(resolve,reject){
-//     console.log("3.收拾桌子");
-//     if(state==1){
-//        resolve("收拾好了");
-//     }else{
-//        reject("收拾桌子出错");
-//     }
-// }
-// new Promise(step1).then(function(val){
-//    console.log(val);
-//    state = 2;
-//    return new Promise(step2);
-// }).then(function(val){
-//     state = 3;
-//     console.log(val);
-//     return new Promise(step3);
-// }).then(function(val){
-//     console.log(val);
-//     return val;
-// });
+let state = 1;
+function step1(resolve,reject){ //这里当然你也可以改成其它名字，反正是形参嘛。不过这两个名称已经是约定俗成，最好不要改。
+    console.log("1.开始洗菜");
+    if(state==1){
+       resolve("菜洗好了");
+    }else{
+       reject("还没洗菜啊");
+    }
+}
+function step2(resolve,reject){
+    console.log("2.坐下来吃饭");
+    if(state==2){
+       resolve("吃好了");
+    }else{
+       reject("坐下来吃饭出错");
+    }
+}
+function step3(resolve,reject){
+    console.log("3.收拾桌子");
+    if(state==1){
+       resolve("收拾好了");
+    }else{
+       reject("收拾桌子出错");
+    }
+}
+new Promise(step1).then(function(val){
+   console.log(val);
+   state = 2;
+   return new Promise(step2);
+}).then(function(val){
+    state = 3;
+    console.log(val);
+    return new Promise(step3);
+}).then(function(val){
+    console.log(val);
+    return val;
+});
 
 //类 class
 // class Coder{
