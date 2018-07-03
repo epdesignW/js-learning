@@ -51,7 +51,6 @@
             </li>
         </ul>
 
-
     </div>
     <p>
         <span>总结：</span>computed 属性是非常有用，在输出数据前可以轻松的改变数据。所以说这节课的代码必须要多敲几遍，加深印象。
@@ -80,11 +79,13 @@
                    return this.prices = '$' + this.prices; 
                },
                renewsList:function(){
-                 //return this.newsList.reverse();
-                // return this.newsList.reverse();    //为什么不起作用
+                   console.log(this);
+                 return newsList.reverse();
+                 return newsList.reverse();    //为什么不起作用
                }
            }
        });
+       console.log(app);
     </script>
 </body>
 </html>

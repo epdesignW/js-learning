@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue test</title>
+    <style>
+        p span {
+            color: darkcyan;
+            font-weight: bold;
+            line-height: 1.6;
+        }
+
+        h4 {
+            margin-top: 30px;
+        }
+
+        #app {
+
+            overflow: hidden;
+        }
+
+        #app ul {
+            width: 100%;
+        }
+
+        #app ul li {
+            
+            list-style: none;
+           
+            padding: 0 2%;
+        }
+
+        #app ul li img {
+            width: 100%;
+        }
+
+        #app ul li a {
+            color: #4c4c4c;
+            font-size: 12px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body style="width: 50%; margin: 0 auto;">
+    <div id="app">
+        <author>
+            <h2 slot="authorName">{{author.name}}</h2>
+            <p slot="blogUrl" v-text="author.blogUrl"></p>
+        </author>
+    </div>
+    <template id="tmp">
+        <div>
+            <ul>
+                <li>作者：
+                    <slot name="authorName"></slot>
+                </li>
+                <li>作品：
+                    <slot name="blogUrl"></slot>
+                </li>
+            </ul>
+        </div>
+    </template>
+    <script src="js/vue.js"></script>
+    <script>
+        var tpl = {
+            template: '#tmp'
+        };
+        new Vue({
+            el: '#app',
+            data:{
+              author: {
+                  name: '张鑫旭',
+                  blogUrl: 'http://baidu.com'
+              }
+            },
+            components: {
+                'author': tpl
+            },
+        });
+
+    </script>
+</body>
+
+</html>

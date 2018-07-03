@@ -44,18 +44,7 @@
                    this.wendu--;
                }
            },
-           //数据监控
-            //    watch:{
-            //       wendu:function(newVal,oldVal){ //参数两个数值
-            //            if(newVal>=25){
-            //                this.suggestion = suggestion[0];
-            //            }else if(newVal<25&&newVal>=10){
-            //              this.suggestion = suggestion[1];
-            //            }else{
-            //              this.suggestion = suggestion[2];
-            //            }
-            //       }
-            //    }
+           
        });
          //数据监控用实例属性写的好处是低耦合
          app.$watch('wendu',function(newVal,oldVal){

@@ -1,97 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Component 标签  - vue第二季 </title>
+    <title>Component 标签 - vue第二季 </title>
     <script src="js/vue.js"></script>
     <style type="text/css">
-     body{ width: 80%; margin: 0 auto;}
-     p span{ color: darkcyan; font-weight: bold; line-height: 1.6;}
-     h4{ margin-top: 40px;}
-     ul{ padding:0; margin: 0;}
-     ul li{ list-style: none; display: inline-block; width:100px; border: 1px solid #CCC; line-height: 38px; text-align: center; }
-     .tabCon p{ width:318px; height: 100px; padding-top: 40px ; text-align:center; background: #ddd; display: none;}
-     .tabCon p:first-child{ display: block;}
+        body {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        p span {
+            color: darkcyan;
+            font-weight: bold;
+            line-height: 1.6;
+        }
+
+        h4 {
+            margin-top: 40px;
+        }
+
+        ul {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            list-style: none;
+            display: inline-block;
+            width: 100px;
+            border: 1px solid #CCC;
+            line-height: 38px;
+            text-align: center;
+        }
+        ul li:hover{
+            cursor: pointer;
+        }
+        ul li.cur {
+           background: darkcyan;
+           border: 1px solid darkcyan;
+           color:#fff;
+        }
+        .tabCon p {
+            width: 318px;
+            height: 100px;
+            padding-top: 40px;
+            text-align: center;
+            background: #ddd;
+        }
+
+        .tabCon p:first-child {
+            display: block;
+        }
     </style>
 </head>
+
 <body>
     <div id="app">
         <h4>Component 标签</h4>
-        <p>&lt;component&gt;&lt;/component&gt;标签是Vue框架自定义的标签，它的用途就是可以<span>动态绑定我们的组件</span>，根据数据的不同更换不同的组件。</p>
-        <component v-bind:is="who"></component>
-        <button v-on:click="changeComponent">更换组件</button>
-        <div id="tab"></div>
+        <p>&lt;component&gt;&lt;/component&gt;标签是Vue框架自定义的标签，它的用途就是可以
+            <span>动态绑定我们的组件</span>，根据数据的不同更换不同的组件。</p>
+        
+        
+        <div id="tab">
             <h4>简单选项卡：</h4>
             <ul>
-                <li ref="li1" @click="tabChange1">a</li>
-                <li ref="li2" @click="tabChange2">b</li>
-                <li ref="li3" @click="tabChange3">c</li>
+                <li @click="tabChange(1)" :class="{cur:cur===1}">a</li>
+                <li @click="tabChange(2)" :class="{cur:cur===2}">b</li>
+                <li @click="tabChange(3)" :class="{cur:cur===3}">c</li>
             </ul>
             <div class="tabCon">
-                <!-- <div class="con" v-for="k in components">{{k}}</div>  v-for指令能不能遍历components-->
-                <component is="componentA"></component>
-                <component is="componentB"></component>
-                <component is="componentC"></component>
+                <p v-show="cur===1">这是<span>A</span>组件</p>
+                <p v-show="cur===2">这是<span>B</span>组件</p>
+                <p v-show="cur===3">这是<span>C</span>组件</p>
             </div>
         </div>
     </div>
-
     <script type="text/javascript">
-       //
-       var componentA = {
-           template:`<p ref="p1">这是<span>A</span>组件</p>`
-       };
-       var componentB = {
-           template:`<p ref="p2">这是<span>B</span>组件</p>`
-       };
-       var componentC = {
-           template:`<p ref="p3">这是<span>C</span>组件</p>`
-       };
+        var app = new Vue({
+            el: '#app',
+            data: {
+               cur: 1
+            },
+            methods: {
+                //简单选项卡
+                tabChange (a) {
+                    this.cur = a;
+                },
+                
+            }
+        });
 
-       var app = new Vue({
-           el: '#app',
-           data:{
-               who:"componentA"
-           },
-           components:{
-               'componentA':componentA,
-               'componentB':componentB,
-               'componentC':componentC
-           },
-           methods:{
-               changeComponent:function(){
-                  if(this.who=='componentA'){
-                    this.who =  'componentB';
-                  }else if(this.who=='componentB'){
-                    this.who =  'componentC';
-                  }else{
-                    this.who =  'componentA';
-                  }  
-               },
-              //简单选项卡
-             tabChange1:function(){
-                 //this.$refs.li1.style.color="red";
-                 this.$refs.p1.style.display="block";
-                 this.$refs.p2.style.display="none";
-                 this.$refs.p3.style.display="none";
-             },
-             tabChange2:function(){
-                 //this.$refs.li1.style.color="red";
-                 this.$refs.p1.style.display="none";
-                 this.$refs.p2.style.display="block";
-                 this.$refs.p3.style.display="none";
-             },
-             tabChange3:function(){
-                 //this.$refs.li1.style.color="red";
-                 this.$refs.p1.style.display="none";
-                 this.$refs.p2.style.display="none";
-                 this.$refs.p3.style.display="block";
-             }
-           }
-       });
-       
     </script>
 </body>
+
 </html>

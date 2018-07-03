@@ -16,6 +16,7 @@
 </head>
 <body>
     <div id="app">
+        <h1>方法是定义在组件标签上的, 组件挂载进来后，标签上定义的方法属性和模板合并</h1>
         <div class="score"><span>{{num}}</span></div>
         <button @click="jiaFen(200,$event)">加分</button>
         <p>传值、event（交互性比较高的地方可以用）、组件调用构造器里的方法.native修饰符，构造器外部调用内部声明方法</p>

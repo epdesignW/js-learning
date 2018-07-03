@@ -31,7 +31,8 @@
        }   
        Vue.directive('jspang',{
            bind:function(el,binding){
-              el.style.color = binding.value;
+              // console.log(binding);  //不知道时候就打印出来看看
+              el.style.color = binding.value.color;
               console.log('1-bind');
            },
            inserted:function(){
@@ -52,7 +53,9 @@
            el: '#app',
            data:{
             num:1,
-            expression1:"darkcyan"
+            expression1:{
+                'color':"darkcyan"
+            }
            },
            methods:{
               jiaYi:function(){

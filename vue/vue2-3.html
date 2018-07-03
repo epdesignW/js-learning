@@ -18,9 +18,9 @@
         目前得分：{{count}}
         <button @click="jiaFen">加分</button>
         <hr>
-        <P >
+        <p>
             是谁： <span>{{arr[0]}}</span>  ？
-        </P>
+        </p>
         <ul>
             <!-- 思考：如果想添加索引，该怎么打印 -->
             <li v-for="key in arr">
@@ -43,14 +43,12 @@
     <script type="text/javascript">
        function jiaFen(){
            //第一种用法
-          // app.count++;
+           // app.count++;
            //outData.count++;
            //Vue.set(outData, 'count', 6); //貌似Vue没用啊
-
            //看看实际用处  
-            //app.arr[0] = "Panda-jspang";   // 改变数字第一个值 不起作用  当DOM不更新的时候
+           //app.arr[0] = "Panda-jspang";   // 改变数字第一个值 不起作用  当DOM不更新的时候
            Vue.set(app.arr, 0,'Panda-jspang');
-
        }
        //外部数据
        var outData = {
@@ -60,11 +58,7 @@
        };
        var app = new Vue({
            el: "#app",
-        //    data:{
-        //        count:1
-
-        //    }
-            data:outData
+           data:outData
        });
     </script>
     
